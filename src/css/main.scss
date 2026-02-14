@@ -1,6 +1,19 @@
 /** ====================================================================================
+                                FOR ALL
+ ====================================================================================**/
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/DMSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+html, body{
+  font-family: "DM Sans", sans-serif !important;
+}
+
+/** ====================================================================================
                                 FOR IMPORTS
  ====================================================================================**/
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import 'displays-dashboard.scss';
