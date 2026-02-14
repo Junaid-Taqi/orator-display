@@ -228,14 +228,115 @@ $notification-dot: #E15555;
   &.icon-offline { color: $status-offline; }
 }
 
-// Table section
+// Table section - design & color scheme from reference image
+$table-bg: #1F3D55;
+$table-row-border: rgba(144, 191, 231, 0.12);
+$table-header-text: #90BFE7;
+$table-cell-text: #ADD8E6;
+$table-cell-text-dim: #8BB8D6;
+$table-accent-cyan: #26C6DA;
+$table-status-online-bg: #6CC074;
+$table-status-offline-bg: #E57373;
+
 .displays-dashboard__table-wrap {
   margin: 0 1.5rem 1.5rem;
-  background: $glass-bg;
+  background: $table-bg;
   border-radius: 12px;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: none;
+}
+
+// PrimeReact DataTable - exact image design
+.displays-dashboard__table-wrap .displays-datatable {
+  .p-datatable-wrapper {
+    border: none;
+    background: transparent;
+  }
+  .p-datatable-table {
+    background: $table-bg;
+  }
+  .p-datatable-table thead tr th {
+    background: $table-bg !important;
+    color: $table-header-text !important;
+    border: none !important;
+    border-bottom: 1px solid $table-row-border !important;
+    padding: 1rem !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase;
+  }
+  .p-datatable-table tbody tr {
+    background: $table-bg !important;
+    border-bottom: 1px solid $table-row-border;
+  }
+  .p-datatable-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  .p-datatable-table tbody tr td {
+    background: transparent !important;
+    color: $table-cell-text !important;
+    border: none !important;
+    padding: 1rem !important;
+    font-size: 0.9rem !important;
+  }
+  .p-datatable-table tbody tr:hover td {
+    background: rgba(46, 81, 111, 0.5) !important;
+  }
+  // Display column: icon + name + location
+  .display-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    .display-icon {
+      font-size: 1.25rem;
+      color: $table-cell-text;
+    }
+    .display-info .display-name {
+      font-weight: 600;
+      color: $table-cell-text;
+      display: block;
+    }
+    .display-info .display-location {
+      font-size: 0.8rem;
+      color: $table-cell-text-dim;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 2px;
+    }
+  }
+  // Status pills: green/red with white text
+  .status-badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff !important;
+    &.status-online {
+      background: $table-status-online-bg;
+    }
+    &.status-offline {
+      background: $table-status-offline-bg;
+    }
+  }
+  // LAST SEEN column: brighter cyan accent
+  .last-seen-cell {
+    color: $table-accent-cyan !important;
+    font-size: 0.9rem;
+  }
+  // Muted cells (resolution, orientation etc.)
+  .muted-cell {
+    color: $table-cell-text !important;
+    font-size: 0.9rem;
+  }
+  // Actions ellipsis
+  .actions-cell {
+    color: $table-cell-text;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
 }
 
 .displays-dashboard__table {

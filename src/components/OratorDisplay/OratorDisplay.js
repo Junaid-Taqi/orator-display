@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'primeicons/primeicons.css';
+import OratorDisplayTable from '../OratorDisplayTable/OratorDisplayTable';
 
 // Resolution & orientation options for Add Display form
 const RESOLUTION_OPTIONS = [
@@ -11,50 +12,6 @@ const RESOLUTION_OPTIONS = [
 const ORIENTATION_OPTIONS = [
     {value: 'Landscape', label: 'Landscape'},
     {value: 'Portrait', label: 'Portrait'},
-];
-
-// Mock data for displays list
-const DISPLAYS_DATA = [
-    {
-        id: 1,
-        name: 'Lobby Screen 1',
-        location: 'Main Entrance',
-        status: 'online',
-        resolution: '1920x1080',
-        orientation: 'Landscape',
-        playlist: 'Main Content Feed',
-        lastSeen: 'Just now',
-    },
-    {
-        id: 2,
-        name: 'Conference Room A',
-        location: 'Building B',
-        status: 'online',
-        resolution: '1920x1080',
-        orientation: 'Landscape',
-        playlist: 'Meeting Schedule',
-        lastSeen: '2 min ago',
-    },
-    {
-        id: 3,
-        name: 'Reception Display',
-        location: 'Ground Floor',
-        status: 'offline',
-        resolution: '1920x1080',
-        orientation: 'Portrait',
-        playlist: 'Welcome Feed',
-        lastSeen: '1 hour ago',
-    },
-    {
-        id: 4,
-        name: 'Cafeteria Screen',
-        location: 'Building A',
-        status: 'online',
-        resolution: '1920x1080',
-        orientation: 'Landscape',
-        playlist: 'Promotions',
-        lastSeen: 'Just now',
-    },
 ];
 
 const OratorDisplay = () => {
@@ -175,7 +132,7 @@ const OratorDisplay = () => {
                         <p className="displays-dashboard__card-title">Total Displays</p>
                         <p className="displays-dashboard__card-value">{totalDisplays}</p>
                     </div>
-                    <i className="pi pi-desktop displays-dashboard__card-icon"/>
+                    <i className="pi pi-desktop displays-dashboard__card-icon pt-3"/>
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
@@ -183,7 +140,7 @@ const OratorDisplay = () => {
                         <p className="displays-dashboard__card-value">{onlineCount}</p>
                     </div>
                     <span
-                        className="displays-dashboard__card-icon icon-online"
+                        className="displays-dashboard__card-icon icon-online mt-4"
                         style={{width: 12, height: 12, borderRadius: '50%', background: '#50E3C2', display: 'inline-block'}}
                         aria-hidden
                     />
@@ -193,58 +150,12 @@ const OratorDisplay = () => {
                         <p className="displays-dashboard__card-title">Offline</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-power-off displays-dashboard__card-icon icon-offline"/>
+                    <i className="pi pi-power-off displays-dashboard__card-icon icon-offline pt-3"/>
                 </div>
             </section>
 
             {/* Display list table */}
-            <div className="displays-dashboard__table-wrap">
-                <table className="displays-dashboard__table">
-                    <thead>
-                    <tr>
-                        <th>DISPLAY</th>
-                        <th>STATUS</th>
-                        <th>RESOLUTION</th>
-                        <th>ORIENTATION</th>
-                        <th>CURRENT PLAYLIST</th>
-                        <th>LAST SEEN</th>
-                        <th>ACTIONS</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {DISPLAYS_DATA.map((row) => (
-                        <tr key={row.id}>
-                            <td>
-                                <div className="display-cell">
-                                    <i className="pi pi-desktop display-icon"/>
-                                    <div className="display-info">
-                                        <span className="display-name">{row.name}</span>
-                                        <span className="display-location">
-                        <i className="pi pi-map-marker" style={{fontSize: '0.7rem'}}/>
-                                            {row.location}
-                      </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                  <span className={`status-badge status-${row.status}`}>
-                    {row.status}
-                  </span>
-                            </td>
-                            <td className="muted-cell">{row.resolution}</td>
-                            <td className="muted-cell">{row.orientation}</td>
-                            <td>{row.playlist}</td>
-                            <td className="muted-cell">{row.lastSeen}</td>
-                            <td>
-                  <span className="actions-cell" role="button" tabIndex={0}>
-                    <i className="pi pi-ellipsis-v"/>
-                  </span>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
+            <OratorDisplayTable />
 
             {/* Help button */}
             <button
