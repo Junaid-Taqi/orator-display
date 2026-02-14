@@ -67,7 +67,7 @@ const OratorDisplay = () => {
 
     const handleLogout = () => {
         setUserMenuOpen(false);
-        // TODO: clear auth, redirect to login
+        window.location.href = '/c/portal/logout';
     };
 
     return (
