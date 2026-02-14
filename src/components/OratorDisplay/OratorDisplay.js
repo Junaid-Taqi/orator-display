@@ -1,17 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import 'primeicons/primeicons.css';
 import OratorDisplayTable from '../OratorDisplayTable/OratorDisplayTable';
 
 // Resolution & orientation options for Add Display form
 const RESOLUTION_OPTIONS = [
-    {value: '1920x1080', label: '1920x1080 (Full HD)'},
-    {value: '1280x720', label: '1280x720 (HD)'},
-    {value: '3840x2160', label: '3840x2160 (4K)'},
-    {value: '2560x1440', label: '2560x1440 (QHD)'},
+    { value: '1920x1080', label: '1920x1080 (Full HD)' },
+    { value: '1280x720', label: '1280x720 (HD)' },
+    { value: '3840x2160', label: '3840x2160 (4K)' },
+    { value: '2560x1440', label: '2560x1440 (QHD)' },
 ];
 const ORIENTATION_OPTIONS = [
-    {value: 'Landscape', label: 'Landscape'},
-    {value: 'Portrait', label: 'Portrait'},
+    { value: 'Landscape', label: 'Landscape' },
+    { value: 'Portrait', label: 'Portrait' },
 ];
 
 const OratorDisplay = () => {
@@ -22,6 +22,8 @@ const OratorDisplay = () => {
     const [addDisplayOpen, setAddDisplayOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const userMenuRef = useRef(null);
+
+    const user = JSON.parse(sessionStorage.getItem("liferayUser"));
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -54,7 +56,7 @@ const OratorDisplay = () => {
     };
 
     const handleFormChange = (field, value) => {
-        setFormData((prev) => ({...prev, [field]: value}));
+        setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
     const handleAddDisplaySubmit = (e) => {
@@ -72,10 +74,10 @@ const OratorDisplay = () => {
         <div className="displays-dashboard">
             {/* Top navigation bar */}
             <nav className="displays-dashboard__nav">
-        <span className="displays-dashboard__nav-bell">
-          <i className="pi pi-bell"/>
-          <span className="nav-bell-dot" aria-hidden/>
-        </span>
+                <span className="displays-dashboard__nav-bell">
+                    <i className="pi pi-bell" />
+                    <span className="nav-bell-dot" aria-hidden />
+                </span>
                 <div className="displays-dashboard__nav-user-wrap" ref={userMenuRef}>
                     <button
                         type="button"
@@ -84,17 +86,17 @@ const OratorDisplay = () => {
                         aria-expanded={userMenuOpen}
                         aria-haspopup="true"
                     >
-                        <i className="pi pi-user nav-user-icon"/>
+                        <i className="pi pi-user nav-user-icon" />
                         <div className="nav-user-info">
-                            <span className="nav-user-name">Admin User</span>
-                            <span className="nav-user-email">admin@orator.com</span>
+                            <span className="nav-user-name">{user?.fullName}</span>
+                            <span className="nav-user-email">{user?.email}</span>
                         </div>
-                        <i className={`pi pi-chevron-down nav-user-chevron ${userMenuOpen ? 'is-open' : ''}`}/>
+                        <i className={`pi pi-chevron-down nav-user-chevron ${userMenuOpen ? 'is-open' : ''}`} />
                     </button>
                     {userMenuOpen && (
                         <div className="displays-dashboard__nav-user-menu" role="menu">
                             <button type="button" className="displays-dashboard__nav-user-menu-item" role="menuitem">
-                                <i className="pi pi-user"/>
+                                <i className="pi pi-user" />
                                 Profile
                             </button>
                             <button
@@ -103,7 +105,7 @@ const OratorDisplay = () => {
                                 role="menuitem"
                                 onClick={handleLogout}
                             >
-                                <i className="pi pi-sign-out"/>
+                                <i className="pi pi-sign-out" />
                                 Logout
                             </button>
                         </div>
@@ -120,7 +122,7 @@ const OratorDisplay = () => {
                     </p>
                 </div>
                 <button type="button" className="displays-dashboard__add-btn" onClick={openAddDisplay}>
-                    <i className="pi pi-plus"/>
+                    <i className="pi pi-plus" />
                     Add Display
                 </button>
             </header>
@@ -132,7 +134,7 @@ const OratorDisplay = () => {
                         <p className="displays-dashboard__card-title">Total Displays</p>
                         <p className="displays-dashboard__card-value">{totalDisplays}</p>
                     </div>
-                    <i className="pi pi-desktop displays-dashboard__card-icon pt-3"/>
+                    <i className="pi pi-desktop displays-dashboard__card-icon pt-3" />
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
@@ -141,7 +143,7 @@ const OratorDisplay = () => {
                     </div>
                     <span
                         className="displays-dashboard__card-icon icon-online mt-4"
-                        style={{width: 12, height: 12, borderRadius: '50%', background: '#50E3C2', display: 'inline-block'}}
+                        style={{ width: 12, height: 12, borderRadius: '50%', background: '#50E3C2', display: 'inline-block' }}
                         aria-hidden
                     />
                 </div>
@@ -150,7 +152,7 @@ const OratorDisplay = () => {
                         <p className="displays-dashboard__card-title">Offline</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-power-off displays-dashboard__card-icon icon-offline pt-3"/>
+                    <i className="pi pi-power-off displays-dashboard__card-icon icon-offline pt-3" />
                 </div>
             </section>
 
@@ -163,7 +165,7 @@ const OratorDisplay = () => {
                 className="displays-dashboard__help-btn"
                 aria-label="Help"
             >
-                <i className="pi pi-question"/>
+                <i className="pi pi-question" />
             </button>
 
             {/* Add New Display modal */}
@@ -216,7 +218,7 @@ const OratorDisplay = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden/>
+                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden />
                             </div>
                             <div className="add-display-form__field">
                                 <label htmlFor="orientation">Orientation</label>
@@ -232,7 +234,7 @@ const OratorDisplay = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden/>
+                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden />
                             </div>
                             <div className="add-display-form__actions">
                                 <button type="button" className="add-display-form__cancel" onClick={closeAddDisplay}>

@@ -6,10 +6,7 @@ import store, {persistor} from './Services/Store/Store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeicons/primeicons.css';
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import OratorDisplay from "./components/OratorDisplay/OratorDisplay";
-
 
 function App() {
     return (
