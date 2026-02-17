@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'primeicons/primeicons.css';
-import OratorDisplayTable from '../OratorDisplayTable/OratorDisplayTable';
 import DisplyCardList from './DisplyCardList';
-import OratorContentList from "../OratorContentList/OratorContentList";
 
 // Resolution & orientation options for Add Display form
 const RESOLUTION_OPTIONS = [
@@ -118,19 +116,15 @@ const OratorContentLibrary = () => {
             {/* Main header */}
             <header className="displays-dashboard__header">
                 <div className="displays-dashboard__title-block">
-                    <h1 className="displays-dashboard__title">Content Library</h1>
+                    <h1 className="displays-dashboard__title">Displays</h1>
                     <p className="displays-dashboard__subtitle">
-                        Create and manage your digital content
+                        Monitor and manage all connected digital signage displays
                     </p>
                 </div>
                 <div className="buttons">
-                    <button type="button" className="displays-dashboard__add-btn btn bg-info me-3" onClick={openAddDisplay}>
-                        <i className="pi pi-upload me-2"/>
-                        Upload Content
-                    </button>
                     <button type="button" className="displays-dashboard__add-btn bg-success btn me-3" onClick={openAddDisplay}>
                         <i className="pi pi-plus me-2"/>
-                        Creat New Display
+                        Add Display
                     </button>
                 </div>
             </header>
@@ -160,31 +154,26 @@ const OratorContentLibrary = () => {
                         <p className="displays-dashboard__card-title">Sleeping</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-user displays-dashboard__card-icon icon-offline pt-3" />
+                    <i className="pi pi-user displays-dashboard__card-icon icon-offline pt-3"/>
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
                         <p className="displays-dashboard__card-title">Offline</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-wifi displays-dashboard__card-icon icon-offline pt-3" />
+                    <i className="pi pi-wifi displays-dashboard__card-icon icon-offline pt-3"/>
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
                         <p className="displays-dashboard__card-title">Avg. Uptime</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-clock displays-dashboard__card-icon icon-offline pt-3" />
+                    <i className="pi pi-clock displays-dashboard__card-icon icon-offline pt-3"/>
                 </div>
             </section>
 
             {/* Display cards (new component) */}
-            <DisplyCardList />
-
-            {/* Content list */}
-            <section className="displays-dashboard__cards">
-                <OratorContentList />
-            </section>
+            <DisplyCardList/>
 
             {/* Help button */}
             <button

@@ -170,8 +170,6 @@ const OratorDisplay = () => {
                 </div>
             </section>
 
-            {/* Display list table */}
-            <OratorDisplayTable />
 
             {/* Help button */}
             <button
