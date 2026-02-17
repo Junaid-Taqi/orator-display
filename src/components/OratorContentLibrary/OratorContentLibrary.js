@@ -1,11 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'primeicons/primeicons.css';
-<<<<<<< HEAD:src/components/OratorDisplay/OratorDisplay.js
 import OratorDisplayTable from '../OratorDisplayTable/OratorDisplayTable';
 import DisplyCardList from './DisplyCardList';
-=======
 import OratorContentList from "../OratorContentList/OratorContentList";
->>>>>>> 09e3e2d71b3252c24bdc4a97a629868daf83ca22:src/components/OratorContentLibrary/OratorContentLibrary.js
 
 // Resolution & orientation options for Add Display form
 const RESOLUTION_OPTIONS = [
@@ -160,7 +157,6 @@ const OratorContentLibrary = () => {
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
-<<<<<<< HEAD:src/components/OratorDisplay/OratorDisplay.js
                         <p className="displays-dashboard__card-title">Sleeping</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
@@ -185,27 +181,10 @@ const OratorContentLibrary = () => {
             {/* Display cards (new component) */}
             <DisplyCardList />
 
-            {/* Display list table */}
-            <OratorDisplayTable />
-=======
-                        <p className="displays-dashboard__card-title">Total Views</p>
-                        <p className="displays-dashboard__card-value">{offlineCount}</p>
-                    </div>
-                    <i className="pi pi-eye fs-3 pt-3 text-light-blue"/>
-                </div>
-                <div className="displays-dashboard__card">
-                    <div className="displays-dashboard__card-content">
-                        <p className="displays-dashboard__card-title">Avg. Engagement</p>
-                        <p className="displays-dashboard__card-value">{offlineCount}</p>
-                    </div>
-                    <i className="pi pi-chart-bar fs-3 pt-3 text-light-blue"/>
-                </div>
-            </section>
-
+            {/* Content list */}
             <section className="displays-dashboard__cards">
-                <OratorContentList/>
+                <OratorContentList />
             </section>
->>>>>>> 09e3e2d71b3252c24bdc4a97a629868daf83ca22:src/components/OratorContentLibrary/OratorContentLibrary.js
 
             {/* Help button */}
             <button
