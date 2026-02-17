@@ -1,5 +1,5 @@
 {
-  "name": "orator-display",
+  "name": "orator-content-library",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -66,8 +66,8 @@
     "liferay-npm-bundler-preset-create-react-app": "^2.31.2"
   },
   "portlet": {
-    "com.liferay.portlet.display-category": "orator-display",
-    "javax.portlet.name": "oratordisplay",
+    "com.liferay.portlet.display-category": "orator-content-library",
+    "javax.portlet.name": "oratorcontentlibrary",
     "javax.portlet.security-role-ref": "power-user,user",
     "javax.portlet.resource-bundle": "content.Language",
     "com.liferay.portlet.instanceable": true
