@@ -1,0 +1,42 @@
+.display-card-list-wrap { display:flex; justify-content:center; padding:18px }
+
+.display-card--big { width: 680px; border-radius: 18px; padding: 12px; background: linear-gradient(180deg,#1f3650 0%, #174558 100%); box-shadow: 0 8px 28px rgba(6,28,39,0.6); border: 2px solid rgba(82,199,180,0.25); }
+.display-card--inner { padding: 18px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+
+.display-card__top { display:flex; gap:18px; align-items:flex-start }
+.icon-square { width:66px; height:66px; border-radius:14px; background: linear-gradient(180deg, rgba(64,196,175,0.12), rgba(64,196,175,0.06)); display:flex; align-items:center; justify-content:center; font-size:28px; color:#8fe6d6 }
+.title-block { flex:1 }
+.title { margin:0; color:#dff6f0; font-size:22px; font-weight:700 }
+.location { margin-top:6px; color:#bfe9e3; font-size:13px }
+.location i { margin-right:8px }
+.badges-row { margin-top:10px; display:flex; gap:10px }
+.pill { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:16px; font-size:13px }
+.pill--green { background: linear-gradient(90deg,#50E3C2,#5BC0EB); color:#023; }
+.pill--purple { background: linear-gradient(90deg,#a88ef0,#d2a9f8); color:#231; }
+
+.display-card__panel { margin-top:16px }
+.panel-grid { display:grid; grid-template-columns: 1fr 1fr; gap:12px; background: rgba(255,255,255,0.03); padding:14px; border-radius:12px }
+.panel-col { padding:8px }
+.panel-label { margin:0; color:rgba(255,255,255,0.7); font-size:13px }
+.panel-value { margin:6px 0 0 0; font-weight:700; color:#fff; font-size:16px }
+
+.display-card__stats-row { display:flex; gap:12px; margin-top:14px }
+.stat-pill { flex:1; display:flex; gap:12px; align-items:center; background: rgba(255,255,255,0.02); padding:12px; border-radius:12px }
+.stat-pill i { font-size:20px; color:#8fe6d6 }
+.stat-label { margin:0; font-size:12px; color:rgba(255,255,255,0.7) }
+.stat-value { margin:4px 0 0 0; font-weight:700 }
+
+.display-card__actions-row { display:flex; gap:12px; margin-top:14px }
+.action-btn { flex:1; background: rgba(255,255,255,0.03); border:none; padding:12px; border-radius:26px; color:#eaf7f2; font-weight:600; display:flex; align-items:center; justify-content:center; gap:10px }
+.action-icon { width:54px; background: rgba(255,255,255,0.03); border:none; padding:10px; border-radius:50%; color:#eaf7f2 }
+
+.sleep-btn-wrap { display:flex; justify-content:center; margin-top:14px }
+.sleep-btn { width:70%; background: linear-gradient(90deg,#3d8fc6,#5aa9d9); border:none; padding:12px 18px; border-radius:26px; color:#eef7fb; font-weight:700; display:flex; justify-content:center; gap:10px }
+
+.display-card__footer { margin-top:14px; padding:12px; border-radius:10px; background: linear-gradient(90deg,#2dcf9f,#2fc881); color:#063; font-weight:700 }
+
+@media (max-width: 760px) {
+  .display-card--big { width: 100%; }
+  .panel-grid { grid-template-columns: 1fr 1fr }
+}
+

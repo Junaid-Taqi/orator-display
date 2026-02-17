@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'primeicons/primeicons.css';
 import OratorDisplayTable from '../OratorDisplayTable/OratorDisplayTable';
+import DisplyCardList from './DisplyCardList';
 
 // Resolution & orientation options for Add Display form
 const RESOLUTION_OPTIONS = [
@@ -149,12 +150,29 @@ const OratorDisplay = () => {
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
+                        <p className="displays-dashboard__card-title">Sleeping</p>
+                        <p className="displays-dashboard__card-value">{offlineCount}</p>
+                    </div>
+                    <i className="pi pi-user displays-dashboard__card-icon icon-offline pt-3" />
+                </div>
+                <div className="displays-dashboard__card">
+                    <div className="displays-dashboard__card-content">
                         <p className="displays-dashboard__card-title">Offline</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-power-off displays-dashboard__card-icon icon-offline pt-3" />
+                    <i className="pi pi-wifi displays-dashboard__card-icon icon-offline pt-3" />
+                </div>
+                <div className="displays-dashboard__card">
+                    <div className="displays-dashboard__card-content">
+                        <p className="displays-dashboard__card-title">Avg. Uptime</p>
+                        <p className="displays-dashboard__card-value">{offlineCount}</p>
+                    </div>
+                    <i className="pi pi-clock displays-dashboard__card-icon icon-offline pt-3" />
                 </div>
             </section>
+
+            {/* Display cards (new component) */}
+            <DisplyCardList />
 
             {/* Display list table */}
             <OratorDisplayTable />
