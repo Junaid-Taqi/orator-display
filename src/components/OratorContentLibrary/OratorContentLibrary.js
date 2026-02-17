@@ -4,16 +4,18 @@ import '../../css/add-display-modal.css';
 import DisplyCardList from './DisplyCardList';
 
 // Resolution & orientation options for Add Display form
-const RESOLUTION_OPTIONS = [
+const LANDSCAPE_RESOLUTIONS = [
     {value: '1920x1080', label: '1920x1080 (Full HD)'},
     {value: '1280x720', label: '1280x720 (HD)'},
     {value: '3840x2160', label: '3840x2160 (4K)'},
     {value: '2560x1440', label: '2560x1440 (QHD)'},
 ];
-const ORIENTATION_OPTIONS = [
-    {value: 'Landscape', label: 'Landscape'},
-    {value: 'Portrait', label: 'Portrait'},
+const PORTRAIT_RESOLUTIONS = [
+    {value: '1080x1920', label: '1080x1920 (Full HD)'},
+    {value: '720x1280', label: '720x1280 (HD)'},
+    {value: '1440x2560', label: '1440x2560 (QHD)'},
 ];
+const RESOLUTION_OPTIONS = LANDSCAPE_RESOLUTIONS;
 
 const OratorContentLibrary = () => {
     const totalDisplays = 24;
@@ -44,6 +46,19 @@ const OratorContentLibrary = () => {
         resolution: '1920x1080',
         orientation: 'Landscape',
     });
+
+    const handleOrientationChange = (orientation) => {
+        const defaultResolution = orientation === 'Portrait' ? '1080x1920' : '1920x1080';
+        setFormData((prev) => ({
+            ...prev,
+            orientation,
+            resolution: defaultResolution,
+        }));
+    };
+
+    const getResolutionOptions = () => {
+        return formData.orientation === 'Portrait' ? PORTRAIT_RESOLUTIONS : LANDSCAPE_RESOLUTIONS;
+    };
 
     const openAddDisplay = () => setAddDisplayOpen(true);
     const closeAddDisplay = () => {
@@ -279,11 +294,19 @@ const OratorContentLibrary = () => {
                                     <div className="form-group">
                                         <label>Orientation *</label>
                                         <div className="orientation-toggle">
-                                            <button type="button" className="orientation-btn active">
+                                            <button 
+                                                type="button" 
+                                                className={`orientation-btn ${formData.orientation === 'Landscape' ? 'active' : ''}`}
+                                                onClick={() => handleOrientationChange('Landscape')}
+                                            >
                                                 <i className="pi pi-tablet"/>
                                                 <span>Landscape</span>
                                             </button>
-                                            <button type="button" className="orientation-btn">
+                                            <button 
+                                                type="button" 
+                                                className={`orientation-btn ${formData.orientation === 'Portrait' ? 'active' : ''}`}
+                                                onClick={() => handleOrientationChange('Portrait')}
+                                            >
                                                 <i className="pi pi-mobile"/>
                                                 <span>Portrait</span>
                                             </button>
@@ -297,7 +320,7 @@ const OratorContentLibrary = () => {
                                             className="form-select"
                                             required
                                         >
-                                            {RESOLUTION_OPTIONS.map((opt) => (
+                                            {getResolutionOptions().map((opt) => (
                                                 <option key={opt.value} value={opt.value}>{opt.label}</option>
                                             ))}
                                         </select>
