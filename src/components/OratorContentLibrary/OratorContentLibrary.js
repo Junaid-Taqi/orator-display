@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'primeicons/primeicons.css';
+import '../../css/add-display-modal.css';
 import DisplyCardList from './DisplyCardList';
 
 // Resolution & orientation options for Add Display form
@@ -194,70 +195,153 @@ const OratorContentLibrary = () => {
                         aria-modal="true"
                         aria-labelledby="add-display-title"
                     >
-                        <h2 id="add-display-title" className="add-display-dialog__title">
-                            Add New Display
-                        </h2>
-                        <form onSubmit={handleAddDisplaySubmit} className="add-display-form">
-                            <div className="add-display-form__field">
-                                <label htmlFor="display-name">Display Name</label>
-                                <input
-                                    id="display-name"
-                                    type="text"
-                                    placeholder="e.g., Lobby Screen 2"
-                                    value={formData.displayName}
-                                    onChange={(e) => handleFormChange('displayName', e.target.value)}
-                                    className="add-display-form__input"
-                                />
+                        <div className="add-display-header">
+                            <h2 id="add-display-title" className="add-display-title">Add New Display</h2>
+                            <p className="add-display-subtitle">Configure and register a new digital signage display</p>
+                            <button type="button" className="close-btn" onClick={closeAddDisplay} aria-label="Close">×</button>
+                        </div>
+                        <form onSubmit={handleAddDisplaySubmit} className="add-display-form-new">
+                            {/* Display Identification Section */}
+                            <div className="form-section">
+                                <div className="section-icon"><i className="pi pi-info-circle"/></div>
+                                <h3>Display Identification</h3>
+                                <p className="section-desc">Auto-generated and external monitoring IDs</p>
+                                
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Auto-Generated Display ID</label>
+                                        <div className="input-with-btn">
+                                            <input type="text" placeholder="DSP-364UV97I" readOnly className="form-input"/>
+                                            <button type="button" className="btn-regenerate">Regenerate</button>
+                                        </div>
+                                        <small>Unique system identifier (auto-generated)</small>
+                                    </div>
+                                </div>
+                                
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Third-Party Monitoring ID</label>
+                                        <input type="text" placeholder="e.g., MAN-12345, EXT-ABC123" className="form-input"/>
+                                        <small>Optional: External monitoring system ID for integration</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="add-display-form__field">
-                                <label htmlFor="location">Location</label>
-                                <input
-                                    id="location"
-                                    type="text"
-                                    placeholder="e.g., Main Entrance"
-                                    value={formData.location}
-                                    onChange={(e) => handleFormChange('location', e.target.value)}
-                                    className="add-display-form__input"
-                                />
+
+                            {/* Basic Information Section */}
+                            <div className="form-section">
+                                <h3>Basic Information</h3>
+                                
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Display Name *</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder="e.g., Totem 1 - Community Center"
+                                            value={formData.displayName}
+                                            onChange={(e) => handleFormChange('displayName', e.target.value)}
+                                            className="form-input"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Location *</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder="e.g., Main Entrance, Building A"
+                                            value={formData.location}
+                                            onChange={(e) => handleFormChange('location', e.target.value)}
+                                            className="form-input"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Assignment Status</label>
+                                        <select className="form-select">
+                                            <option>Unassigned</option>
+                                            <option>Assigned</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <small>Assign display to a specific zone or department</small>
                             </div>
-                            <div className="add-display-form__field">
-                                <label htmlFor="resolution">Resolution</label>
-                                <select
-                                    id="resolution"
-                                    value={formData.resolution}
-                                    onChange={(e) => handleFormChange('resolution', e.target.value)}
-                                    className="add-display-form__select"
-                                >
-                                    {RESOLUTION_OPTIONS.map((opt) => (
-                                        <option key={opt.value} value={opt.value}>
-                                            {opt.label}
-                                        </option>
-                                    ))}
-                                </select>
-                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden/>
+
+                            {/* Display Specifications Section */}
+                            <div className="form-section">
+                                <h3>Display Specifications</h3>
+                                
+                                <div className="form-row two-col">
+                                    <div className="form-group">
+                                        <label>Orientation *</label>
+                                        <div className="orientation-toggle">
+                                            <button type="button" className="orientation-btn active">
+                                                <i className="pi pi-tablet"/>
+                                                <span>Landscape</span>
+                                            </button>
+                                            <button type="button" className="orientation-btn">
+                                                <i className="pi pi-mobile"/>
+                                                <span>Portrait</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Resolution *</label>
+                                        <select 
+                                            value={formData.resolution}
+                                            onChange={(e) => handleFormChange('resolution', e.target.value)}
+                                            className="form-select"
+                                            required
+                                        >
+                                            {RESOLUTION_OPTIONS.map((opt) => (
+                                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                            ))}
+                                        </select>
+                                        <small>Select screen resolution</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="add-display-form__field">
-                                <label htmlFor="orientation">Orientation</label>
-                                <select
-                                    id="orientation"
-                                    value={formData.orientation}
-                                    onChange={(e) => handleFormChange('orientation', e.target.value)}
-                                    className="add-display-form__select"
-                                >
-                                    {ORIENTATION_OPTIONS.map((opt) => (
-                                        <option key={opt.value} value={opt.value}>
-                                            {opt.label}
-                                        </option>
-                                    ))}
-                                </select>
-                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden/>
+
+                            {/* Sleep Schedule Section */}
+                            <div className="form-section">
+                                <div className="section-icon"><i className="pi pi-moon"/></div>
+                                <h3>Sleep Schedule</h3>
+                                <p className="section-desc">Configure power management and sleep times</p>
+                                
+                                <div className="form-row two-col">
+                                    <div className="form-group">
+                                        <label>Wake Time</label>
+                                        <div className="time-input">
+                                            <input type="time" defaultValue="05:00" className="form-input"/>
+                                            <i className="pi pi-calendar"/>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Sleep Time</label>
+                                        <div className="time-input">
+                                            <input type="time" defaultValue="23:59" className="form-input"/>
+                                            <i className="pi pi-calendar"/>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="add-display-form__actions">
-                                <button type="button" className="add-display-form__cancel" onClick={closeAddDisplay}>
+
+                            {/* Note Section */}
+                            <div className="form-note">
+                                <i className="pi pi-info-circle"/>
+                                <p><strong>Next Steps:</strong> After creating this display, you'll need to install the ORATOR Player app on the physical device and use the generated Display ID for the pairing process.</p>
+                            </div>
+
+                            <div className="form-actions">
+                                <button type="button" className="btn-cancel" onClick={closeAddDisplay}>
                                     Cancel
                                 </button>
-                                <button type="submit" className="add-display-form__submit">
-                                    Add Display
+                                <button type="submit" className="btn-submit">
+                                    Create Display
                                 </button>
                             </div>
                         </form>
