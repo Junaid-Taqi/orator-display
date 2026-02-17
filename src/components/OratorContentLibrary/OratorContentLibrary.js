@@ -1,20 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import 'primeicons/primeicons.css';
-import OratorDisplayTable from '../OratorDisplayTable/OratorDisplayTable';
+import OratorContentList from "../OratorContentList/OratorContentList";
 
 // Resolution & orientation options for Add Display form
 const RESOLUTION_OPTIONS = [
-    { value: '1920x1080', label: '1920x1080 (Full HD)' },
-    { value: '1280x720', label: '1280x720 (HD)' },
-    { value: '3840x2160', label: '3840x2160 (4K)' },
-    { value: '2560x1440', label: '2560x1440 (QHD)' },
+    {value: '1920x1080', label: '1920x1080 (Full HD)'},
+    {value: '1280x720', label: '1280x720 (HD)'},
+    {value: '3840x2160', label: '3840x2160 (4K)'},
+    {value: '2560x1440', label: '2560x1440 (QHD)'},
 ];
 const ORIENTATION_OPTIONS = [
-    { value: 'Landscape', label: 'Landscape' },
-    { value: 'Portrait', label: 'Portrait' },
+    {value: 'Landscape', label: 'Landscape'},
+    {value: 'Portrait', label: 'Portrait'},
 ];
 
-const OratorDisplay = () => {
+const OratorContentLibrary = () => {
     const totalDisplays = 24;
     const onlineCount = 22;
     const offlineCount = 2;
@@ -56,7 +56,7 @@ const OratorDisplay = () => {
     };
 
     const handleFormChange = (field, value) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
+        setFormData((prev) => ({...prev, [field]: value}));
     };
 
     const handleAddDisplaySubmit = (e) => {
@@ -75,8 +75,8 @@ const OratorDisplay = () => {
             {/* Top navigation bar */}
             <nav className="displays-dashboard__nav">
                 <span className="displays-dashboard__nav-bell">
-                    <i className="pi pi-bell" />
-                    <span className="nav-bell-dot" aria-hidden />
+                    <i className="pi pi-bell"/>
+                    <span className="nav-bell-dot" aria-hidden/>
                 </span>
                 <div className="displays-dashboard__nav-user-wrap" ref={userMenuRef}>
                     <button
@@ -86,17 +86,17 @@ const OratorDisplay = () => {
                         aria-expanded={userMenuOpen}
                         aria-haspopup="true"
                     >
-                        <i className="pi pi-user nav-user-icon" />
+                        <i className="pi pi-user nav-user-icon"/>
                         <div className="nav-user-info">
                             <span className="nav-user-name">{user?.fullName}</span>
                             <span className="nav-user-email">{user?.email}</span>
                         </div>
-                        <i className={`pi pi-chevron-down nav-user-chevron ${userMenuOpen ? 'is-open' : ''}`} />
+                        <i className={`pi pi-chevron-down nav-user-chevron ${userMenuOpen ? 'is-open' : ''}`}/>
                     </button>
                     {userMenuOpen && (
                         <div className="displays-dashboard__nav-user-menu" role="menu">
                             <button type="button" className="displays-dashboard__nav-user-menu-item" role="menuitem">
-                                <i className="pi pi-user" />
+                                <i className="pi pi-user"/>
                                 Profile
                             </button>
                             <button
@@ -105,7 +105,7 @@ const OratorDisplay = () => {
                                 role="menuitem"
                                 onClick={handleLogout}
                             >
-                                <i className="pi pi-sign-out" />
+                                <i className="pi pi-sign-out"/>
                                 Logout
                             </button>
                         </div>
@@ -116,48 +116,62 @@ const OratorDisplay = () => {
             {/* Main header */}
             <header className="displays-dashboard__header">
                 <div className="displays-dashboard__title-block">
-                    <h1 className="displays-dashboard__title">Displays</h1>
+                    <h1 className="displays-dashboard__title">Content Library</h1>
                     <p className="displays-dashboard__subtitle">
-                        Manage your digital signage displays
+                        Create and manage your digital content
                     </p>
                 </div>
-                <button type="button" className="displays-dashboard__add-btn" onClick={openAddDisplay}>
-                    <i className="pi pi-plus" />
-                    Add Display
-                </button>
+                <div className="buttons">
+                    <button type="button" className="displays-dashboard__add-btn btn bg-info me-3" onClick={openAddDisplay}>
+                        <i className="pi pi-upload me-2"/>
+                        Upload Content
+                    </button>
+                    <button type="button" className="displays-dashboard__add-btn bg-success btn me-3" onClick={openAddDisplay}>
+                        <i className="pi pi-plus me-2"/>
+                        Creat New Display
+                    </button>
+                </div>
             </header>
 
             {/* Summary cards */}
             <section className="displays-dashboard__cards">
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
-                        <p className="displays-dashboard__card-title">Total Displays</p>
+                        <p className="displays-dashboard__card-title">Total Content</p>
                         <p className="displays-dashboard__card-value">{totalDisplays}</p>
                     </div>
-                    <i className="pi pi-desktop displays-dashboard__card-icon pt-3" />
+                    <i className="pi pi-file-o fs-3 pt-3 text-light-blue"/>
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
-                        <p className="displays-dashboard__card-title">Online</p>
+                        <p className="displays-dashboard__card-title">Active</p>
                         <p className="displays-dashboard__card-value">{onlineCount}</p>
                     </div>
                     <span
                         className="displays-dashboard__card-icon icon-online mt-4"
-                        style={{ width: 12, height: 12, borderRadius: '50%', background: '#50E3C2', display: 'inline-block' }}
+                        style={{width: 16, height: 16, borderRadius: '50%', background: '#50E3C2', display: 'inline-block'}}
                         aria-hidden
                     />
                 </div>
                 <div className="displays-dashboard__card">
                     <div className="displays-dashboard__card-content">
-                        <p className="displays-dashboard__card-title">Offline</p>
+                        <p className="displays-dashboard__card-title">Total Views</p>
                         <p className="displays-dashboard__card-value">{offlineCount}</p>
                     </div>
-                    <i className="pi pi-power-off displays-dashboard__card-icon icon-offline pt-3" />
+                    <i className="pi pi-eye fs-3 pt-3 text-light-blue"/>
+                </div>
+                <div className="displays-dashboard__card">
+                    <div className="displays-dashboard__card-content">
+                        <p className="displays-dashboard__card-title">Avg. Engagement</p>
+                        <p className="displays-dashboard__card-value">{offlineCount}</p>
+                    </div>
+                    <i className="pi pi-chart-bar fs-3 pt-3 text-light-blue"/>
                 </div>
             </section>
 
-            {/* Display list table */}
-            <OratorDisplayTable />
+            <section className="displays-dashboard__cards">
+                <OratorContentList/>
+            </section>
 
             {/* Help button */}
             <button
@@ -165,7 +179,7 @@ const OratorDisplay = () => {
                 className="displays-dashboard__help-btn"
                 aria-label="Help"
             >
-                <i className="pi pi-question" />
+                <i className="pi pi-question"/>
             </button>
 
             {/* Add New Display modal */}
@@ -218,7 +232,7 @@ const OratorDisplay = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden />
+                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden/>
                             </div>
                             <div className="add-display-form__field">
                                 <label htmlFor="orientation">Orientation</label>
@@ -234,7 +248,7 @@ const OratorDisplay = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden />
+                                <i className="pi pi-chevron-down add-display-form__chevron" aria-hidden/>
                             </div>
                             <div className="add-display-form__actions">
                                 <button type="button" className="add-display-form__cancel" onClick={closeAddDisplay}>
@@ -252,4 +266,4 @@ const OratorDisplay = () => {
     );
 };
 
-export default OratorDisplay;
+export default OratorContentLibrary;

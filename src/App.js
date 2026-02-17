@@ -6,14 +6,14 @@ import store, {persistor} from './Services/Store/Store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeicons/primeicons.css';
-import OratorDisplay from "./components/OratorDisplay/OratorDisplay";
+import OratorContentLibrary from "./components/OratorContentLibrary/OratorContentLibrary";
 
 function App() {
     return (
         <div className="App">
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <OratorDisplay/>
+                    <OratorContentLibrary/>
                 </PersistGate>
             </Provider>
         </div>

@@ -17,3 +17,21 @@ html, body{
  ====================================================================================**/
 
 @import 'displays-dashboard.scss';
+
+.text-light-blue {
+  color: #0dcaf0;
+}
+
+.label {
+  font-weight: normal !important;
+  border: 0 !important;
+  font-size: 12px !important;
+  box-shadow: none !important;
+}
+.media-name {
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90%;
+  overflow: hidden;
+}
