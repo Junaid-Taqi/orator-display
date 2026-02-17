@@ -32,7 +32,6 @@
 .add-display-title {
   margin: 0;
   font-size: 24px;
-  font-weight: 700;
   color: #dff6f0;
 }
 
@@ -77,11 +76,16 @@
   position: relative;
 }
 
-.form-section h3 {
+.form-section > .section-icon + h3 {
+  display: inline-block;
   margin: 0 0 8px 0;
   font-size: 16px;
-  font-weight: 700;
   color: #dff6f0;
+  vertical-align: middle;
+}
+
+.form-section h3 {
+  margin: 0 !important;
 }
 
 .section-icon {
@@ -95,6 +99,7 @@
   color: #50c8b4;
   font-size: 16px;
   margin-right: 12px;
+  vertical-align: middle;
 }
 
 .section-desc {
@@ -124,7 +129,6 @@
 .form-group label {
   margin-bottom: 8px;
   font-size: 13px;
-  font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -218,12 +222,14 @@
 .orientation-btn:hover {
   border-color: rgba(80, 200, 180, 0.4);
   background: rgba(80, 200, 180, 0.08);
+  font-weight: normal !important;
 }
 
 .orientation-btn.active {
   border-color: #50c8b4;
   background: linear-gradient(135deg, rgba(80, 200, 180, 0.2), rgba(80, 200, 180, 0.1));
   color: #50c8b4;
+  font-weight: normal !important;
 }
 
 .orientation-btn i {
@@ -274,7 +280,6 @@
 
 .form-note strong {
   color: #dff6f0;
-  font-weight: 700;
 }
 
 .form-actions {
@@ -309,7 +314,6 @@
   border: none;
   border-radius: 8px;
   color: #023;
-  font-weight: 700;
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
