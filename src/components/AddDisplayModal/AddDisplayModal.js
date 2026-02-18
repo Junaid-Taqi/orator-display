@@ -320,7 +320,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                     show={toastState.show}
                     onClose={() => setToastState((prev) => ({ ...prev, show: false }))}
                     autohide
-                    delay={4000}
+                    delay={6000}
                 >
                     <Toast.Header closeButton>
                         <strong className="me-auto">
