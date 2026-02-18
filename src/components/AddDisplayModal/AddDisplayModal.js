@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Toast, ToastContainer } from 'react-bootstrap';
 import { addDisplay } from '../../Services/Slices/AddDisplaySlice';
 import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
 
@@ -34,7 +35,11 @@ const AddDisplayModal = ({ onClose, user }) => {
     const { status } = useSelector((state) => state.AddDisplay);
 
     const [createdDisplayId, setCreatedDisplayId] = useState('');
-    const [submitError, setSubmitError] = useState('');
+    const [toastState, setToastState] = useState({
+        show: false,
+        message: '',
+        variant: 'danger',
+    });
     const [formData, setFormData] = useState({
         displayName: '',
         location: '',
@@ -47,7 +52,6 @@ const AddDisplayModal = ({ onClose, user }) => {
     });
 
     const handleFormChange = (field, value) => {
-        if (submitError) setSubmitError('');
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
@@ -75,7 +79,6 @@ const AddDisplayModal = ({ onClose, user }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitError('');
         const groupId = user?.groups?.[0]?.id;
         const userId = user?.userId;
 
@@ -99,12 +102,21 @@ const AddDisplayModal = ({ onClose, user }) => {
             }
             const apiDisplayId = extractDisplayId(result.payload);
             setCreatedDisplayId(apiDisplayId);
+            setToastState({
+                show: true,
+                message: 'Display created successfully.',
+                variant: 'success',
+            });
         } else {
             const rawMessage = result?.payload?.message || result?.error?.message || 'Unable to create display.';
             const userMessage = rawMessage.includes('playerId already exists')
                 ? 'This Player ID already exists. Please enter a different Third-Party Monitoring ID.'
                 : rawMessage;
-            setSubmitError(userMessage);
+            setToastState({
+                show: true,
+                message: userMessage,
+                variant: 'danger',
+            });
         }
     };
 
@@ -149,13 +161,6 @@ const AddDisplayModal = ({ onClose, user }) => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="add-display-form-new">
-                        {submitError && (
-                            <div className="form-note" role="alert">
-                                <i className="pi pi-exclamation-triangle" />
-                                <p>{submitError}</p>
-                            </div>
-                        )}
-
                         {/* Display Identification */}
                         <div className="form-section">
                             <div className="section-icon"><i className="pi pi-info-circle" /></div>
@@ -308,6 +313,25 @@ const AddDisplayModal = ({ onClose, user }) => {
                     </form>
                 )}
             </div>
+
+            <ToastContainer position="top-end" className="p-3">
+                <Toast
+                    bg={toastState.variant}
+                    show={toastState.show}
+                    onClose={() => setToastState((prev) => ({ ...prev, show: false }))}
+                    autohide
+                    delay={4000}
+                >
+                    <Toast.Header closeButton>
+                        <strong className="me-auto">
+                            {toastState.variant === 'success' ? 'Success' : 'Error'}
+                        </strong>
+                    </Toast.Header>
+                    <Toast.Body className={toastState.variant === 'danger' ? 'text-white' : ''}>
+                        {toastState.message}
+                    </Toast.Body>
+                </Toast>
+            </ToastContainer>
         </div>
     );
 };
