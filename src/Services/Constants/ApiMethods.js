@@ -5,4 +5,4 @@ const GETTOKEN = () => {
     };
 };
 
-export {GETTOKEN};
+export { GETTOKEN };
