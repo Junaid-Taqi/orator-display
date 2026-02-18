@@ -76,7 +76,7 @@ const DisplyCardList = ({ displays = [] }) => {
 
               <div className="display-card__stats-row">
                 <div className="stat-pill">
-                  <i className="pi pi-thermometer" />
+                  <i className="pi pi-cloud" />
                   <div>
                     <p className="stat-label">Temp</p>
                     <p className="stat-value">{d.temperature != null ? d.temperature + '°C' : '—'}</p>
