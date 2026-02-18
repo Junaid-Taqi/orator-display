@@ -1,27 +1,74 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dialog } from 'primereact/dialog';
+import { updateDisplay } from '../../Services/Slices/UpdateDisplaySlice';
+import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
 import './DisplaySettingsDialog.css';
 
 const DisplaySettingsDialog = ({ display, visible, onHide }) => {
+  const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.UpdateDisplay);
+
   const [enableSchedule, setEnableSchedule] = useState(false);
-  const [sleepTime, setSleepTime] = useState('11:59:59 PM');
-  const [wakeTime, setWakeTime] = useState('05:59:59 AM');
+  const [sleepTime, setSleepTime] = useState('');
+  const [wakeTime, setWakeTime] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const nextSleepTime = display?.sleepTime || '';
+    const nextWakeTime = display?.wakeTime || '';
+    setSleepTime(nextSleepTime);
+    setWakeTime(nextWakeTime);
+    setEnableSchedule(Boolean(nextSleepTime || nextWakeTime));
+    setErrorMessage('');
+  }, [display, visible]);
 
   const handleScheduleToggle = (e) => {
     setEnableSchedule(e.target.checked);
   };
 
-  const handleSave = () => {
-    // Handle save logic here
-    console.log('Saving settings:', { enableSchedule, sleepTime, wakeTime });
-    onHide();
+  const handleSave = async () => {
+    setErrorMessage('');
+
+    if (!display?.displayId) {
+      setErrorMessage('Display ID is missing. Unable to update display.');
+      return;
+    }
+
+    const user = JSON.parse(sessionStorage.getItem('liferayUser')) || {};
+    const groupId = user?.groups?.[0]?.id;
+
+    const payload = {
+      displayId: String(display.displayId),
+      name: display?.name || '',
+      location: display?.location || '',
+      playerId: display?.playerId || '',
+      resolution: display?.resolution || '',
+      orientation: display?.orientation || '',
+      assignmentStatus: display?.assignmentStatus || '',
+      wakeTime: enableSchedule ? wakeTime : '',
+      sleepTime: enableSchedule ? sleepTime : '',
+    };
+
+    const result = await dispatch(updateDisplay(payload));
+    if (updateDisplay.fulfilled.match(result) && result.payload?.success) {
+      if (groupId) {
+        dispatch(getAllDisplays({ groupId: String(groupId) }));
+      }
+      onHide();
+      return;
+    }
+
+    setErrorMessage(result?.payload?.message || result?.error?.message || 'Unable to update display.');
   };
 
   const handleCancel = () => {
-    // Reset states if needed
-    setEnableSchedule(false);
-    setSleepTime('11:59:59 PM');
-    setWakeTime('05:59:59 AM');
+    const nextSleepTime = display?.sleepTime || '';
+    const nextWakeTime = display?.wakeTime || '';
+    setSleepTime(nextSleepTime);
+    setWakeTime(nextWakeTime);
+    setEnableSchedule(Boolean(nextSleepTime || nextWakeTime));
+    setErrorMessage('');
     onHide();
   };
 
@@ -34,7 +81,6 @@ const DisplaySettingsDialog = ({ display, visible, onHide }) => {
       contentClassName="settings-dialog-content"
     >
       <div className="dialog-body-content">
-        {/* Daily Sleep Schedule Section */}
         <div className="settings-section">
           <div className="section-header">
             <i className="pi pi-calendar"></i>
@@ -65,6 +111,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide }) => {
                 className="time-input"
                 value={sleepTime}
                 onChange={(e) => setSleepTime(e.target.value)}
+                placeholder="HH:mm"
               />
               <p className="time-hint">Display will enter sleep mode at this time</p>
             </div>
@@ -76,20 +123,21 @@ const DisplaySettingsDialog = ({ display, visible, onHide }) => {
                 className="time-input"
                 value={wakeTime}
                 onChange={(e) => setWakeTime(e.target.value)}
+                placeholder="HH:mm"
               />
               <p className="time-hint">Display will wake up at this time</p>
             </div>
           </div>
 
           <div className="schedule-summary">
-            <span className="summary-icon">✓</span>
+            <span className="summary-icon">OK</span>
             <span className="summary-text">
-              Schedule Active: Display will sleep at {sleepTime} and wake at {wakeTime} daily.
+              Schedule {enableSchedule ? 'enabled' : 'disabled'}.
+              {enableSchedule ? ` Sleep: ${sleepTime || '--'} | Wake: ${wakeTime || '--'}` : ''}
             </span>
           </div>
         </div>
 
-        {/* Display Information Section */}
         <div className="settings-section">
           <h3 className="section-title">Display Information</h3>
 
@@ -112,21 +160,34 @@ const DisplaySettingsDialog = ({ display, visible, onHide }) => {
               readOnly
             />
           </div>
+
+          <div className="info-group">
+            <label className="info-label">Player ID</label>
+            <input
+              type="text"
+              className="info-input"
+              value={display?.playerId || ''}
+              readOnly
+            />
+          </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="dialog-footer-actions">
-          <button className="btn-cancel" onClick={handleCancel}>
+          <button className="btn-cancel" onClick={handleCancel} disabled={status === 'loading'}>
             Cancel
           </button>
-          <button className="btn-save" onClick={handleSave}>
-            Save
+          <button className="btn-save" onClick={handleSave} disabled={status === 'loading'}>
+            {status === 'loading' ? 'Saving...' : 'Save'}
           </button>
         </div>
+        {errorMessage ? (
+          <p className="schedule-description" style={{ marginTop: '10px', color: '#ffb3b3' }}>
+            {errorMessage}
+          </p>
+        ) : null}
       </div>
     </Dialog>
   );
 };
 
 export default DisplaySettingsDialog;
-
