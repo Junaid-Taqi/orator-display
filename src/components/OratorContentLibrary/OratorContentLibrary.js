@@ -12,14 +12,14 @@ const OratorContentLibrary = () => {
     const dispatch = useDispatch();
     const { displayList, stats } = useSelector((state) => state.GetDisplays);
     const user = JSON.parse(sessionStorage.getItem("liferayUser"));
-
+    const { token, expiresIn } = useSelector((state) => state.auth);
     const [addDisplayOpen, setAddDisplayOpen] = useState(false);
 
     useEffect(() => {
-        if (user?.groups?.[0]?.id) {
+        if (user?.groups?.[0]?.id && token) {
             dispatch(getAllDisplays({ groupId: String(user.groups[0].id) }));
         }
-    }, [dispatch]);
+    }, [dispatch, toekn]);
 
     return (
         <div className="displays-dashboard">
