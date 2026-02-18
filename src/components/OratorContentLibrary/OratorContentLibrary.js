@@ -11,7 +11,17 @@ import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
 const OratorContentLibrary = () => {
     const dispatch = useDispatch();
     const { displayList, stats } = useSelector((state) => state.GetDisplays);
-    const user = JSON.parse(sessionStorage.getItem("liferayUser"));
+    const user = JSON.parse(sessionStorage.getItem("liferayUser")) || {
+        "userId": "32533",
+        "fullName": "admin lahore",
+        "email": "admin@lahore.com",
+        "groups": [
+            {
+                "id": "32394",
+                "name": "Municipality One"
+            }
+        ]
+    };
     const { token, expiresIn } = useSelector((state) => state.auth);
     const [addDisplayOpen, setAddDisplayOpen] = useState(false);
 
@@ -19,7 +29,7 @@ const OratorContentLibrary = () => {
         if (user?.groups?.[0]?.id && token) {
             dispatch(getAllDisplays({ groupId: String(user.groups[0].id) }));
         }
-    }, [dispatch, toekn]);
+    }, [dispatch, token]);
 
     return (
         <div className="displays-dashboard">
