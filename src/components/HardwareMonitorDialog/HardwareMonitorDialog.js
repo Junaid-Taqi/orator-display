@@ -38,7 +38,7 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
           <div className="stat-card temperature-card">
             <div className="stat-card-header">
               <div className="stat-icon temp-icon">
-                <i className="pi pi-thermometer"></i>
+                <i className="pi pi-cloud"></i>
               </div>
               <h3 className="stat-card-title">Temperature</h3>
             </div>
