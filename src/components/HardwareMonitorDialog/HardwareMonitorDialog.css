@@ -1,0 +1,350 @@
+.monitor-dialog :global(.p-dialog) {
+  background: linear-gradient(180deg, #1a3a52 0%, #0f2f42 100%);
+  border: 2px solid rgba(82, 199, 180, 0.3);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  width: 95vw !important;
+  max-width: 1200px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+.monitor-dialog :global(.p-dialog-header) {
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  border-bottom: none;
+  min-height: auto;
+}
+
+.monitor-dialog :global(.p-dialog-content) {
+  padding: 0;
+  background: transparent;
+}
+
+.monitor-dialog-content {
+  background: linear-gradient(180deg, #1f3650 0%, #174558 100%);
+  padding: 0 !important;
+}
+
+.monitor-dialog :global(.p-dialog-header-icons) {
+  gap: 8px;
+}
+
+.monitor-dialog :global(.p-dialog-header-icon) {
+  color: #8fe6d6;
+  transition: 0.2s;
+}
+
+.monitor-dialog :global(.p-dialog-header-icon:hover) {
+  color: #fff;
+}
+
+.monitor-dialog :global(.p-dialog-header .p-dialog-title) {
+  display: none;
+}
+
+/* Dialog Body */
+.dialog-body-content {
+  padding: 24px;
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+.dialog-body-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dialog-body-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dialog-body-content::-webkit-scrollbar-thumb {
+  background: rgba(82, 199, 180, 0.3);
+  border-radius: 3px;
+}
+
+.dialog-body-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(82, 199, 180, 0.5);
+}
+
+/* Monitor Header */
+.monitor-header {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(82, 199, 180, 0.15);
+}
+
+.monitor-title {
+  margin: 0 0 4px 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.monitor-subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Hardware Stats Grid */
+.hardware-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Stat Card */
+.stat-card {
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(64, 112, 144, 0.25), rgba(40, 92, 124, 0.15));
+  border: 1px solid rgba(82, 199, 180, 0.15);
+  border-radius: 12px;
+}
+
+.stat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.stat-card-header-full {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.temp-icon {
+  background: linear-gradient(135deg, rgba(0, 150, 255, 0.2), rgba(0, 180, 255, 0.1));
+  color: #00d4ff;
+}
+
+.fan-icon {
+  background: linear-gradient(135deg, rgba(0, 200, 150, 0.2), rgba(0, 230, 180, 0.1));
+  color: #00d4ff;
+}
+
+.power-icon {
+  background: linear-gradient(135deg, rgba(255, 180, 0, 0.2), rgba(255, 210, 0, 0.1));
+  color: #ffc000;
+}
+
+.brightness-icon {
+  background: linear-gradient(135deg, rgba(255, 150, 0, 0.2), rgba(255, 180, 0, 0.1));
+  color: #ff9800;
+}
+
+.storage-icon {
+  background: linear-gradient(135deg, rgba(150, 100, 255, 0.2), rgba(180, 130, 255, 0.1));
+  color: #b882ff;
+}
+
+.system-icon {
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.2), rgba(130, 220, 255, 0.1));
+  color: #64c8ff;
+}
+
+.stat-card-title {
+  margin: 0;
+  color: #dff6f0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stat-card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.stat-card-value .unit {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+/* Progress Bar */
+.stat-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.temp-fill {
+  background: linear-gradient(90deg, #00d4ff, #00b4ff);
+}
+
+.fan-fill {
+  background: linear-gradient(90deg, #00d4ff, #00c8ff);
+}
+
+.power-fill {
+  background: linear-gradient(90deg, #ffc000, #ffb000);
+}
+
+.brightness-fill {
+  background: linear-gradient(90deg, #ff9800, #ff8800);
+}
+
+.storage-fill {
+  background: linear-gradient(90deg, #b882ff, #a870ff);
+}
+
+.stat-card-description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+/* Storage Card Special */
+.storage-card {
+  position: relative;
+}
+
+.storage-value {
+  font-size: 18px;
+}
+
+.storage-percentage {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: #b882ff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* System Status Card */
+.system-card {
+  grid-column: 1 / -1;
+}
+
+.system-status-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.status-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.status-value {
+  color: #dff6f0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.online-status {
+  color: #2dcf9f;
+  background: rgba(45, 207, 159, 0.15);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Dialog Footer Actions */
+.dialog-footer-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(82, 199, 180, 0.15);
+}
+
+.btn-close {
+  width: 100%;
+  padding: 12px 18px;
+  background: linear-gradient(90deg, #3d8fc6, #5aa9d9);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-close:hover {
+  background: linear-gradient(90deg, #4d9fd6, #6ab9e9);
+  box-shadow: 0 4px 12px rgba(61, 143, 198, 0.3);
+}
+
+.btn-close:active {
+  background: linear-gradient(90deg, #2d7fb6, #4a99c9);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .hardware-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hardware-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .system-status-content {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+
+  .dialog-body-content {
+    padding: 16px;
+  }
+
+  .monitor-title {
+    font-size: 20px;
+  }
+
+  .stat-card-value {
+    font-size: 24px;
+  }
+}
+

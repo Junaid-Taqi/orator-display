@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './DisplyCardList.css';
 import DisplaySettingsDialog from '../DisplaySettingsDialog/DisplaySettingsDialog';
+import HardwareMonitorDialog from '../HardwareMonitorDialog/HardwareMonitorDialog';
 
 const statusLabel = (status) => {
   if (status === 1) return { label: 'Online', cls: 'pill--green' };
@@ -10,10 +11,16 @@ const statusLabel = (status) => {
 const DisplyCardList = ({ displays = [] }) => {
   const [selectedDisplay, setSelectedDisplay] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [monitorDialogVisible, setMonitorDialogVisible] = useState(false);
 
   const handleSettingsClick = (display) => {
     setSelectedDisplay(display);
     setDialogVisible(true);
+  };
+
+  const handleMonitorClick = (display) => {
+    setSelectedDisplay(display);
+    setMonitorDialogVisible(true);
   };
   if (displays.length === 0) {
     return (
@@ -93,7 +100,7 @@ const DisplyCardList = ({ displays = [] }) => {
 
               <div className="display-card__actions-row">
                 <button className="action-btn"><i className="pi pi-eye" /> Preview</button>
-                <button className="action-btn"><i className="pi pi-line-chart" /> Monitor</button>
+                <button className="action-btn" onClick={() => handleMonitorClick(d)}><i className="pi pi-line-chart" /> Monitor</button>
                 <button className="action-icon" onClick={() => handleSettingsClick(d)}><i className="pi pi-cog" /></button>
               </div>
 
@@ -112,6 +119,11 @@ const DisplyCardList = ({ displays = [] }) => {
         display={selectedDisplay}
         visible={dialogVisible}
         onHide={() => setDialogVisible(false)}
+      />
+      <HardwareMonitorDialog
+        display={selectedDisplay}
+        visible={monitorDialogVisible}
+        onHide={() => setMonitorDialogVisible(false)}
       />
     </section>
   );
