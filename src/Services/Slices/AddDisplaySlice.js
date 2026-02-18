@@ -10,7 +10,7 @@ const initialState = {
 
 export const addDisplay = createAsyncThunk(
     'AddDisplay/addDisplay',
-    async (payload) => {
+    async (payload, { rejectWithValue }) => {
         try {
             const config = {
                 headers: {
@@ -19,10 +19,15 @@ export const addDisplay = createAsyncThunk(
                 },
             };
 
-            const response = await axios.post(`${serverUrl}/o/rest/displayManagementApplication/addNewDisplay`, payload, config);
+            const response = await axios.post(`${serverUrl}/o/displayManagementApplication/addNewDisplay`, payload, config);
+            if (!response.data?.success) {
+                return rejectWithValue(response.data);
+            }
             return response.data;
         } catch (error) {
-            throw error;
+            return rejectWithValue(
+                error?.response?.data || { message: error.message || 'Failed to add display' }
+            );
         }
     }
 );
@@ -37,14 +42,16 @@ const AddDisplaySlice = createSlice({
         builder
             .addCase(addDisplay.pending, (state) => {
                 state.status = 'loading';
+                state.error = null;
             })
             .addCase(addDisplay.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.addedDisplay = action.payload;
+                state.error = null;
             })
             .addCase(addDisplay.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message;
+                state.error = action.payload?.message || action.error.message;
             });
     },
 });

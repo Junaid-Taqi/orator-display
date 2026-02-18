@@ -20,7 +20,7 @@ export const getAllDisplays = createAsyncThunk(
                 },
             };
 
-            const response = await axios.post(`${serverUrl}/o/rest/displayManagementApplication/getAllDisplays`, payload, config);
+            const response = await axios.post(`${serverUrl}/o/displayManagementApplication/getAllDisplays`, payload, config);
             return response.data;
         } catch (error) {
             throw error;

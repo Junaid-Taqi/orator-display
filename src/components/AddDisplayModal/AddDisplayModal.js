@@ -34,6 +34,7 @@ const AddDisplayModal = ({ onClose, user }) => {
     const { status } = useSelector((state) => state.AddDisplay);
 
     const [createdDisplayId, setCreatedDisplayId] = useState('');
+    const [submitError, setSubmitError] = useState('');
     const [formData, setFormData] = useState({
         displayName: '',
         location: '',
@@ -46,6 +47,7 @@ const AddDisplayModal = ({ onClose, user }) => {
     });
 
     const handleFormChange = (field, value) => {
+        if (submitError) setSubmitError('');
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
@@ -73,6 +75,7 @@ const AddDisplayModal = ({ onClose, user }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSubmitError('');
         const groupId = user?.groups?.[0]?.id;
         const userId = user?.userId;
 
@@ -90,12 +93,18 @@ const AddDisplayModal = ({ onClose, user }) => {
         };
 
         const result = await dispatch(addDisplay(payload));
-        if (result.payload?.success) {
+        if (addDisplay.fulfilled.match(result) && result.payload?.success) {
             if (groupId) {
                 dispatch(getAllDisplays({ groupId: String(groupId) }));
             }
             const apiDisplayId = extractDisplayId(result.payload);
             setCreatedDisplayId(apiDisplayId);
+        } else {
+            const rawMessage = result?.payload?.message || result?.error?.message || 'Unable to create display.';
+            const userMessage = rawMessage.includes('playerId already exists')
+                ? 'This Player ID already exists. Please enter a different Third-Party Monitoring ID.'
+                : rawMessage;
+            setSubmitError(userMessage);
         }
     };
 
@@ -140,6 +149,13 @@ const AddDisplayModal = ({ onClose, user }) => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="add-display-form-new">
+                        {submitError && (
+                            <div className="form-note" role="alert">
+                                <i className="pi pi-exclamation-triangle" />
+                                <p>{submitError}</p>
+                            </div>
+                        )}
+
                         {/* Display Identification */}
                         <div className="form-section">
                             <div className="section-icon"><i className="pi pi-info-circle" /></div>
