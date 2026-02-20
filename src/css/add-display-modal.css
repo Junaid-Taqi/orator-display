@@ -12,7 +12,7 @@
 }
 
 .add-display-dialog {
-  background: linear-gradient(135deg, #1a3a4a 0%, #0d2635 100%);
+  background: linear-gradient(135deg, #2d6d8f 0%, #1e4d63 100%);
   border: 1px solid rgba(80, 200, 180, 0.3);
   border-radius: 14px;
   width: 90%;
@@ -24,7 +24,7 @@
 }
 
 .add-display-header {
-  padding: 24px;
+  padding: 10px;
   border-bottom: 1px solid rgba(80, 200, 180, 0.2);
   position: relative;
 }
@@ -74,6 +74,7 @@
   border-radius: 12px;
   padding: 20px;
   position: relative;
+  margin-top: 20px;
 }
 
 .form-section > .section-icon + h3 {
@@ -249,6 +250,7 @@
 
 .time-input i {
   position: absolute;
+  display:none;
   right: 12px;
   color: rgba(255, 255, 255, 0.4);
   font-size: 14px;
