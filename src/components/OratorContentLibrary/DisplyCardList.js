@@ -8,7 +8,7 @@ const statusLabel = (status) => {
   return { label: 'Offline', cls: 'pill--red' };
 };
 
-const DisplyCardList = ({ displays = [] }) => {
+const DisplyCardList = ({ displays = [], user }) => {
   const [selectedDisplay, setSelectedDisplay] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [monitorDialogVisible, setMonitorDialogVisible] = useState(false);
@@ -119,6 +119,7 @@ const DisplyCardList = ({ displays = [] }) => {
         display={selectedDisplay}
         visible={dialogVisible}
         onHide={() => setDialogVisible(false)}
+        user={user}
       />
       <HardwareMonitorDialog
         display={selectedDisplay}

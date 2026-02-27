@@ -12,16 +12,17 @@ const OratorContentLibrary = () => {
     const dispatch = useDispatch();
     const { displayList, stats } = useSelector((state) => state.GetDisplays);
     const user = JSON.parse(sessionStorage.getItem("liferayUser")) || {
-        "userId": "32533",
+        "userId": "24608",
         "fullName": "admin lahore",
         "email": "admin@lahore.com",
         "groups": [
             {
-                "id": "32394",
-                "name": "Municipality One"
+                "id": "24593",
+                "name": "Municipility One"
             }
         ]
     };
+    
     const { token, expiresIn } = useSelector((state) => state.auth);
     const [addDisplayOpen, setAddDisplayOpen] = useState(false);
 
@@ -36,7 +37,7 @@ const OratorContentLibrary = () => {
             <DisplayNav user={user} />
             <DisplayHeader onAddDisplay={() => setAddDisplayOpen(true)} />
             <StatsCards stats={stats} />
-            <DisplyCardList displays={displayList} />
+            <DisplyCardList displays={displayList} user={user} />
 
             <button
                 type="button"

@@ -5,7 +5,7 @@ import { updateDisplay } from '../../Services/Slices/UpdateDisplaySlice';
 import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
 import './DisplaySettingsDialog.css';
 
-const DisplaySettingsDialog = ({ display, visible, onHide }) => {
+const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.UpdateDisplay);
 
@@ -35,7 +35,6 @@ const DisplaySettingsDialog = ({ display, visible, onHide }) => {
       return;
     }
 
-    const user = JSON.parse(sessionStorage.getItem('liferayUser')) || {};
     const groupId = user?.groups?.[0]?.id;
 
     const payload = {
