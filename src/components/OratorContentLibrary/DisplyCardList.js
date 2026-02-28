@@ -12,6 +12,7 @@ const DisplyCardList = ({ displays = [], user }) => {
   const [selectedDisplay, setSelectedDisplay] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [monitorDialogVisible, setMonitorDialogVisible] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const handleSettingsClick = (display) => {
     setSelectedDisplay(display);
@@ -34,7 +35,7 @@ const DisplyCardList = ({ displays = [], user }) => {
 
   return (
     <section className="display-card-list-wrap">
-      {displays.map((d) => {
+      {displays.slice(0, visibleCount).map((d) => {
         const { label, cls } = statusLabel(d.status);
         return (
           <article key={d.displayId} className="display-card--big">
@@ -44,10 +45,13 @@ const DisplyCardList = ({ displays = [], user }) => {
                   <i className="pi pi-desktop" />
                 </div>
                 <div className="title-block">
-                  <h2 className="title">{d.name}</h2>
-                  <div className="location"><i className="pi pi-map-marker" /> {d.location}</div>
+                  <h2 className="title text-capitalize">{d.name}</h2>
+                  <div className="location text-capitalize"><i className="pi pi-map-marker" /> {d.location}</div>
                   <div className="badges-row">
                     <span className={`pill ${cls}`}><i className="pi pi-wifi" /> {label}</span>
+                    {d.playerId && (
+                      <span className="pill pill--blue"><i className="pi pi-hashtag" /> {d.playerId}</span>
+                    )}
                     <span className="pill pill--purple"><i className="pi pi-tv" /> {d.orientation}</span>
                   </div>
                 </div>
@@ -115,6 +119,19 @@ const DisplyCardList = ({ displays = [], user }) => {
           </article>
         );
       })}
+
+      {visibleCount < displays.length && (
+        <div style={{ textAlign: 'center' }}>
+          <button
+            className="btn btn-outline-primary px-4 py-2 my-5"
+            onClick={() => setVisibleCount(prev => prev + 6)}
+            style={{ fontWeight: 500, borderRadius: '50rem' }}
+          >
+            Load More Displays
+          </button>
+        </div>
+      )}
+
       <DisplaySettingsDialog
         display={selectedDisplay}
         visible={dialogVisible}
