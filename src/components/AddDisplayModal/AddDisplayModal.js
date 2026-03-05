@@ -31,6 +31,9 @@ const extractDisplayId = (response) => {
 };
 
 const AddDisplayModal = ({ onClose, user }) => {
+    const NAME_MAX = 300;
+    const LOCATION_MAX = 500;
+    const PLAYER_ID_MAX = 300;
     const dispatch = useDispatch();
     const { status } = useSelector((state) => state.AddDisplay);
 
@@ -81,13 +84,24 @@ const AddDisplayModal = ({ onClose, user }) => {
         e.preventDefault();
         const groupId = user?.groups?.[0]?.id;
         const userId = user?.userId;
+        const name = formData.displayName.trim();
+        const location = formData.location.trim();
+        const playerId = formData.thirdPartyMonitoringId.trim();
+        if (!name || !location || !playerId) {
+            setToastState({
+                show: true,
+                message: 'Display Name, Location, and Third-Party Monitoring ID are required.',
+                variant: 'danger',
+            });
+            return;
+        }
 
         const payload = {
             groupId: String(groupId),
             userId: String(userId),
-            name: formData.displayName,
-            location: formData.location,
-            playerId: formData.thirdPartyMonitoringId?.trim(),
+            name,
+            location,
+            playerId,
             resolution: formData.resolution,
             orientation: formData.orientation,
             assignmentStatus: formData.assignmentStatus,
@@ -173,6 +187,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                                         type="text"
                                         placeholder="e.g., MAN-12345, EXT-ABC123"
                                         className="form-input"
+                                        maxLength={PLAYER_ID_MAX}
                                         value={formData.thirdPartyMonitoringId}
                                         onChange={(e) => handleFormChange('thirdPartyMonitoringId', e.target.value)}
                                         required
@@ -191,6 +206,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                                     <input
                                         type="text"
                                         placeholder="e.g., Totem 1 - Community Center"
+                                        maxLength={NAME_MAX}
                                         value={formData.displayName}
                                         onChange={(e) => handleFormChange('displayName', e.target.value)}
                                         className="form-input"
@@ -204,6 +220,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                                     <input
                                         type="text"
                                         placeholder="e.g., Main Entrance, Building A"
+                                        maxLength={LOCATION_MAX}
                                         value={formData.location}
                                         onChange={(e) => handleFormChange('location', e.target.value)}
                                         className="form-input"

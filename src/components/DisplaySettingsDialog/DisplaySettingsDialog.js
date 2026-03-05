@@ -6,6 +6,10 @@ import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
 import './DisplaySettingsDialog.css';
 
 const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
+  const NAME_MAX = 300;
+  const LOCATION_MAX = 500;
+  const PLAYER_ID_MAX = 300;
+  const TIME_MAX = 5; // HH:mm
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.UpdateDisplay);
 
@@ -36,6 +40,16 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
     }
 
     const groupId = user?.groups?.[0]?.id;
+    const normalizedWakeTime = (wakeTime || '').trim();
+    const normalizedSleepTime = (sleepTime || '').trim();
+    const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+    if (enableSchedule) {
+      if (!timePattern.test(normalizedSleepTime) || !timePattern.test(normalizedWakeTime)) {
+        setErrorMessage('Sleep Time and Wake Time must be in HH:mm format.');
+        return;
+      }
+    }
 
     const payload = {
       displayId: String(display.displayId),
@@ -45,8 +59,8 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
       resolution: display?.resolution || '',
       orientation: display?.orientation || '',
       assignmentStatus: display?.assignmentStatus || '',
-      wakeTime: enableSchedule ? wakeTime : '',
-      sleepTime: enableSchedule ? sleepTime : '',
+      wakeTime: enableSchedule ? normalizedWakeTime : '',
+      sleepTime: enableSchedule ? normalizedSleepTime : '',
     };
 
     const result = await dispatch(updateDisplay(payload));
@@ -111,6 +125,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
                 value={sleepTime}
                 onChange={(e) => setSleepTime(e.target.value)}
                 placeholder="HH:mm"
+                maxLength={TIME_MAX}
               />
               <p className="time-hint">Display will enter sleep mode at this time</p>
             </div>
@@ -123,6 +138,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
                 value={wakeTime}
                 onChange={(e) => setWakeTime(e.target.value)}
                 placeholder="HH:mm"
+                maxLength={TIME_MAX}
               />
               <p className="time-hint">Display will wake up at this time</p>
             </div>
@@ -146,6 +162,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
               type="text"
               className="info-input"
               value={display?.name || ''}
+              maxLength={NAME_MAX}
               readOnly
             />
           </div>
@@ -156,6 +173,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
               type="text"
               className="info-input"
               value={display?.location || ''}
+              maxLength={LOCATION_MAX}
               readOnly
             />
           </div>
@@ -166,6 +184,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
               type="text"
               className="info-input"
               value={display?.playerId || ''}
+              maxLength={PLAYER_ID_MAX}
               readOnly
             />
           </div>
