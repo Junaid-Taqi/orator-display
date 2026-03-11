@@ -179,7 +179,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
           </div>
 
           <div className="info-group">
-            <label className="info-label">Player ID</label>
+            <label className="info-label">Third-Party Monitoring ID</label>
             <input
               type="text"
               className="info-input"

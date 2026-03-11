@@ -20,12 +20,7 @@ const extractDisplayId = (response) => {
     if (!response || typeof response !== 'object') return '';
 
     return (
-        response?.displayId ||
-        response?.playerId ||
-        response?.data?.displayId ||
-        response?.data?.playerId ||
-        response?.display?.displayId ||
-        response?.display?.playerId ||
+        response?.displayUuid ||
         ''
     );
 };
