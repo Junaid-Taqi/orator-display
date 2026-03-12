@@ -194,7 +194,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
             <input
               type="text"
               className="info-input"
-              value={display?.uuid || ''}
+              value={display?.displayUuid || ''}
               maxLength={PLAYER_ID_MAX}
               readOnly
             />
