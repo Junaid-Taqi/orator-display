@@ -188,6 +188,17 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
               readOnly
             />
           </div>
+
+          <div className="info-group">
+            <label className="info-label">UUID</label>
+            <input
+              type="text"
+              className="info-input"
+              value={display?.uuid || ''}
+              maxLength={PLAYER_ID_MAX}
+              readOnly
+            />
+          </div>
         </div>
 
         <div className="dialog-footer-actions">
