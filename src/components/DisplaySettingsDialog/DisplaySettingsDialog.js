@@ -4,8 +4,10 @@ import { Dialog } from 'primereact/dialog';
 import { updateDisplay } from '../../Services/Slices/UpdateDisplaySlice';
 import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
 import './DisplaySettingsDialog.css';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
+  const { t } = useTranslation();
   const NAME_MAX = 300;
   const LOCATION_MAX = 500;
   const PLAYER_ID_MAX = 300;
@@ -97,13 +99,13 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
         <div className="settings-section">
           <div className="section-header">
             <i className="pi pi-calendar"></i>
-            <h3 className="section-title">Daily Sleep Schedule</h3>
+            <h3 className="section-title">{t('sleep_schedule')}</h3>
           </div>
-          <p className="section-description">Automatically put display to sleep and wake up</p>
+          <p className="section-description">{t('sleep_schedule_description')}</p>
 
           <div className="schedule-item">
             <div className="schedule-label-row">
-              <label className="schedule-label">Enable Sleep Schedule</label>
+              <label className="schedule-label">{t('enable_sleep_schedule')}</label>
               <label className="toggle-switch">
                 <input
                   type="checkbox"
@@ -113,12 +115,12 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
                 <span className="toggle-slider"></span>
               </label>
             </div>
-            <p className="schedule-description">Automatically manage display power</p>
+            <p className="schedule-description">{t('auto_manage_sleep')}</p>
           </div>
 
           <div className="time-inputs-group">
             <div className="time-input-block">
-              <label className="time-label">Sleep Time</label>
+              <label className="time-label">{t('sleep_time')}</label>
               <input
                 type="text"
                 className="time-input"
@@ -127,11 +129,11 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
                 placeholder="HH:mm"
                 maxLength={TIME_MAX}
               />
-              <p className="time-hint">Display will enter sleep mode at this time</p>
+              <p className="time-hint">{t('sleep_time_hint')}</p>
             </div>
 
             <div className="time-input-block">
-              <label className="time-label">Wake Time</label>
+              <label className="time-label">{t('wake_time')}</label>
               <input
                 type="text"
                 className="time-input"
@@ -140,7 +142,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
                 placeholder="HH:mm"
                 maxLength={TIME_MAX}
               />
-              <p className="time-hint">Display will wake up at this time</p>
+              <p className="time-hint">{t('wake_time_hint')}</p>
             </div>
           </div>
 
@@ -154,10 +156,10 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
         </div>
 
         <div className="settings-section">
-          <h3 className="section-title">Display Information</h3>
+          <h3 className="section-title">{t('display_information')}</h3>
 
           <div className="info-group">
-            <label className="info-label">Display Name</label>
+            <label className="info-label">{t('display_name')}</label>
             <input
               type="text"
               className="info-input"
@@ -168,7 +170,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
           </div>
 
           <div className="info-group">
-            <label className="info-label">Location</label>
+            <label className="info-label">{t('location')}</label>
             <input
               type="text"
               className="info-input"
@@ -179,7 +181,7 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
           </div>
 
           <div className="info-group">
-            <label className="info-label">Third-Party Monitoring ID</label>
+            <label className="info-label">{t('thirdParty_MonitorId')}</label>
             <input
               type="text"
               className="info-input"
@@ -203,10 +205,10 @@ const DisplaySettingsDialog = ({ display, visible, onHide, user }) => {
 
         <div className="dialog-footer-actions">
           <button className="btn-cancel" onClick={handleCancel} disabled={status === 'loading'}>
-            Cancel
+            {t('cancel')}
           </button>
           <button className="btn-save" onClick={handleSave} disabled={status === 'loading'}>
-            {status === 'loading' ? 'Saving...' : 'Save'}
+            {status === 'loading' ? 'Saving...' : t('save')}
           </button>
         </div>
         {errorMessage ? (

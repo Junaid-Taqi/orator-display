@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './DisplyCardList.css';
 import DisplaySettingsDialog from '../DisplaySettingsDialog/DisplaySettingsDialog';
 import HardwareMonitorDialog from '../HardwareMonitorDialog/HardwareMonitorDialog';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 const statusLabel = (status) => {
   if (status === 1) return { label: 'Online', cls: 'pill--green' };
@@ -13,6 +14,7 @@ const DisplyCardList = ({ displays = [], user }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [monitorDialogVisible, setMonitorDialogVisible] = useState(false);
   const [visibleCount, setVisibleCount] = useState(6);
+  const { t } = useTranslation();
 
   const handleSettingsClick = (display) => {
     setSelectedDisplay(display);
@@ -60,19 +62,19 @@ const DisplyCardList = ({ displays = [], user }) => {
               <div className="display-card__panel">
                 <div className="panel-grid">
                   <div className="panel-col">
-                    <p className="panel-label">Resolution</p>
+                    <p className="panel-label">{t('resolution')}</p>
                     <p className="panel-value">{d.resolution || '—'}</p>
                   </div>
                   <div className="panel-col">
-                    <p className="panel-label">Uptime</p>
+                    <p className="panel-label">{t('uptime')}</p>
                     <p className="panel-value">{d.uptime != null ? d.uptime.toFixed(1) + '%' : '—'}</p>
                   </div>
                   <div className="panel-col">
-                    <p className="panel-label">Wake / Sleep</p>
+                    <p className="panel-label">{t('wake_sleep')}</p>
                     <p className="panel-value">{d.wakeTime} / {d.sleepTime}</p>
                   </div>
                   <div className="panel-col">
-                    <p className="panel-label">Assignment</p>
+                    <p className="panel-label">{t('assignment')}</p>
                     <p className="panel-value">{d.assignmentStatus || '—'}</p>
                   </div>
                 </div>
@@ -82,38 +84,38 @@ const DisplyCardList = ({ displays = [], user }) => {
                 <div className="stat-pill">
                   <i className="pi pi-cloud" />
                   <div>
-                    <p className="stat-label">Temp</p>
+                    <p className="stat-label">{t('temperature')}</p>
                     <p className="stat-value">{d.temperature != null ? d.temperature + '°C' : '—'}</p>
                   </div>
                 </div>
                 <div className="stat-pill">
                   <i className="pi pi-refresh" />
                   <div>
-                    <p className="stat-label">Fan</p>
+                    <p className="stat-label">{t('fan')}</p>
                     <p className="stat-value">{d.fanSpeed != null ? d.fanSpeed + ' RPM' : '—'}</p>
                   </div>
                 </div>
                 <div className="stat-pill">
                   <i className="pi pi-bolt" />
                   <div>
-                    <p className="stat-label">Power</p>
+                    <p className="stat-label">{t('power')}</p>
                     <p className="stat-value">{d.powerConsumption != null ? d.powerConsumption + 'W' : '—'}</p>
                   </div>
                 </div>
               </div>
 
               <div className="display-card__actions-row">
-                <button className="action-btn"><i className="pi pi-eye" /> Preview</button>
-                <button className="action-btn" onClick={() => handleMonitorClick(d)}><i className="pi pi-line-chart" /> Monitor</button>
+                <button className="action-btn"><i className="pi pi-eye" /> {t('preview')}</button>
+                <button className="action-btn" onClick={() => handleMonitorClick(d)}><i className="pi pi-line-chart" /> {t('monitor')}</button>
                 <button className="action-icon" onClick={() => handleSettingsClick(d)}><i className="pi pi-cog" /></button>
               </div>
 
               <div className="sleep-btn-wrap">
-                <button className="sleep-btn"><i className="pi pi-moon" /> Enter Sleep Mode</button>
+                <button className="sleep-btn"><i className="pi pi-moon" /> {t('enter_sleep_mode')}</button>
               </div>
 
               <div className={`display-card__footer ${d.status === 1 ? '' : 'footer--offline'}`}>
-                {d.status === 1 ? 'Display is active and playing content' : 'Display is offline'}
+                {d.status === 1 ? t('display_active') : t('display_offline')}
               </div>
             </div>
           </article>
@@ -127,7 +129,7 @@ const DisplyCardList = ({ displays = [], user }) => {
             onClick={() => setVisibleCount(prev => prev + 6)}
             style={{ fontWeight: 500, borderRadius: '50rem' }}
           >
-            Load More Displays
+            {t('load_more')}
           </button>
         </div>
       )}

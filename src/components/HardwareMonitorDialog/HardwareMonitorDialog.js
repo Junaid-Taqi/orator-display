@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dialog } from 'primereact/dialog';
 import './HardwareMonitorDialog.css';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 const getDisplayValue = (value, suffix = '') => {
   if (value === null || value === undefined || value === '') return '--';
@@ -20,6 +21,7 @@ const clampDirectPercent = (value) => {
 };
 
 const HardwareMonitorDialog = ({ display, visible, onHide }) => {
+  const { t } = useTranslation();
   return (
     <Dialog
       visible={visible}
@@ -31,7 +33,7 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
       <div className="dialog-body-content">
         <div className="monitor-header">
           <h2 className="monitor-title">{display?.name ?? 'Display'}</h2>
-          <p className="monitor-subtitle">Hardware Monitoring & Diagnostics</p>
+          <p className="monitor-subtitle">{t('hardware_monitoring')}</p>
         </div>
 
         <div className="hardware-stats-grid">
@@ -40,13 +42,13 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
               <div className="stat-icon temp-icon">
                 <i className="pi pi-cloud"></i>
               </div>
-              <h3 className="stat-card-title">Temperature</h3>
+              <h3 className="stat-card-title">{t('temperature')}</h3>
             </div>
-            <div className="stat-card-value">{getDisplayValue(display?.temperature, '°C')}</div>
+            <div className="stat-card-value">{getDisplayValue(display?.temperature, 'ï¿½C')}</div>
             <div className="stat-progress-bar">
               <div className="progress-fill temp-fill" style={{ width: `${clampPercent(display?.temperature, 100)}%` }}></div>
             </div>
-            <p className="stat-card-description">Normal operating temperature</p>
+            <p className="stat-card-description">{t('temperature_description')}</p>
           </div>
 
           <div className="stat-card fan-card">
@@ -54,13 +56,13 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
               <div className="stat-icon fan-icon">
                 <i className="pi pi-refresh"></i>
               </div>
-              <h3 className="stat-card-title">Fan Speed</h3>
+              <h3 className="stat-card-title">{t('fanSpeed')}</h3>
             </div>
             <div className="stat-card-value">{getDisplayValue(display?.fanSpeed, ' RPM')}</div>
             <div className="stat-progress-bar">
               <div className="progress-fill fan-fill" style={{ width: `${clampPercent(display?.fanSpeed, 3000)}%` }}></div>
             </div>
-            <p className="stat-card-description">Fan operating normally</p>
+            <p className="stat-card-description">{t('fan_description')}</p>
           </div>
 
           <div className="stat-card power-card">
@@ -68,13 +70,13 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
               <div className="stat-icon power-icon">
                 <i className="pi pi-bolt"></i>
               </div>
-              <h3 className="stat-card-title">Power</h3>
+              <h3 className="stat-card-title">{t('power')}</h3>
             </div>
             <div className="stat-card-value">{getDisplayValue(display?.powerConsumption, 'W')}</div>
             <div className="stat-progress-bar">
               <div className="progress-fill power-fill" style={{ width: `${clampPercent(display?.powerConsumption, 500)}%` }}></div>
             </div>
-            <p className="stat-card-description">Current power consumption</p>
+            <p className="stat-card-description">{t('power_description')}</p>
           </div>
 
           <div className="stat-card brightness-card">
@@ -82,13 +84,13 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
               <div className="stat-icon brightness-icon">
                 <i className="pi pi-palette"></i>
               </div>
-              <h3 className="stat-card-title">Brightness</h3>
+              <h3 className="stat-card-title">{t('brightness')}</h3>
             </div>
             <div className="stat-card-value">{getDisplayValue(display?.brightness, '%')}</div>
             <div className="stat-progress-bar">
               <div className="progress-fill brightness-fill" style={{ width: `${clampDirectPercent(display?.brightness)}%` }}></div>
             </div>
-            <p className="stat-card-description">Display brightness level</p>
+            <p className="stat-card-description">{t('brightness_description')}</p>
           </div>
 
           <div className="stat-card storage-card">
@@ -96,13 +98,13 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
               <div className="stat-icon storage-icon">
                 <i className="pi pi-inbox"></i>
               </div>
-              <h3 className="stat-card-title">Storage</h3>
+              <h3 className="stat-card-title">{t('storage')}</h3>
             </div>
             <div className="stat-card-value storage-value">{getDisplayValue(display?.storage)}</div>
             <div className="stat-progress-bar">
               <div className="progress-fill storage-fill" style={{ width: `${clampDirectPercent(display?.storage)}%` }}></div>
             </div>
-            <p className="stat-card-description">API field: storage</p>
+            <p className="stat-card-description">{t('storage_description')}</p>
           </div>
 
           <div className="stat-card system-card">
@@ -110,23 +112,23 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
               <div className="stat-icon system-icon">
                 <i className="pi pi-server"></i>
               </div>
-              <h3 className="stat-card-title">System Status</h3>
+              <h3 className="stat-card-title">{t('systemStatus')}</h3>
             </div>
             <div className="system-status-content">
               <div className="status-row">
-                <span className="status-label">Status:</span>
+                <span className="status-label">{t('status')} </span>
                 <span className="status-value online-status">{display?.status === 1 ? 'Online' : 'Offline'}</span>
               </div>
               <div className="status-row">
-                <span className="status-label">Uptime:</span>
+                <span className="status-label">{t('uptime')}:</span>
                 <span className="status-value">{getDisplayValue(display?.uptime)}</span>
               </div>
               <div className="status-row">
-                <span className="status-label">Resolution:</span>
+                <span className="status-label">{t('resolution')}:</span>
                 <span className="status-value">{getDisplayValue(display?.resolution)}</span>
               </div>
               <div className="status-row">
-                <span className="status-label">Last Seen:</span>
+                <span className="status-label">{t('lastSeen')}:</span>
                 <span className="status-value">{getDisplayValue(display?.lastSeen)}</span>
               </div>
             </div>
@@ -135,7 +137,7 @@ const HardwareMonitorDialog = ({ display, visible, onHide }) => {
 
         <div className="dialog-footer-actions">
           <button className="btn-close" onClick={onHide}>
-            Close
+            {t('close')}
           </button>
         </div>
       </div>

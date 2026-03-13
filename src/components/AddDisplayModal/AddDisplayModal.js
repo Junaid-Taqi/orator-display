@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { addDisplay } from '../../Services/Slices/AddDisplaySlice';
 import { getAllDisplays } from '../../Services/Slices/GetDisplaysSlice';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 const LANDSCAPE_RESOLUTIONS = [
     { value: '1920x1080', label: '1920x1080 (Full HD)' },
@@ -26,6 +27,7 @@ const extractDisplayId = (response) => {
 };
 
 const AddDisplayModal = ({ onClose, user }) => {
+    const { t } = useTranslation();
     const NAME_MAX = 300;
     const LOCATION_MAX = 500;
     const PLAYER_ID_MAX = 300;
@@ -250,14 +252,14 @@ const AddDisplayModal = ({ onClose, user }) => {
                                             className={`orientation-btn ${formData.orientation === 'Landscape' ? 'active' : ''}`}
                                             onClick={() => handleOrientationChange('Landscape')}
                                         >
-                                            <i className="pi pi-tablet" /><span>Landscape</span>
+                                            <i className="pi pi-tablet" /><span>{t('landscape')}</span>
                                         </button>
                                         <button
                                             type="button"
                                             className={`orientation-btn ${formData.orientation === 'Portrait' ? 'active' : ''}`}
                                             onClick={() => handleOrientationChange('Portrait')}
                                         >
-                                            <i className="pi pi-mobile" /><span>Portrait</span>
+                                            <i className="pi pi-mobile" /><span>{t('portrait')}</span>
                                         </button>
                                     </div>
                                 </div>
