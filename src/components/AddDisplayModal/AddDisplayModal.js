@@ -142,12 +142,12 @@ const AddDisplayModal = ({ onClose, user }) => {
             >
                 <div className="add-display-header">
                     <h2 id="add-display-title" className="add-display-title">
-                        {createdDisplayId ? 'Display Created' : 'Add New Display'}
+                        {createdDisplayId ? 'Display Created' : t('addDisplay')}
                     </h2>
                     <p className="add-display-subtitle">
                         {createdDisplayId
                             ? 'Your display was added successfully. Use this Display ID to pair the player app.'
-                            : 'Configure and register a new digital signage display'}
+                            : t('addDisplaySubtitle')}
                     </p>
                     <button type="button" className="close-btn" onClick={onClose} aria-label="Close">&times;</button>
                 </div>
@@ -155,19 +155,19 @@ const AddDisplayModal = ({ onClose, user }) => {
                 {createdDisplayId ? (
                     <div className="add-display-form-new">
                         <div className="form-section">
-                            <h3>Generated Display ID</h3>
+                            <h3>{t('generatedDisplayId')}</h3>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Display ID</label>
+                                    <label>{t('display_id')}</label>
                                     <input type="text" value={createdDisplayId} readOnly className="form-input" />
-                                    <small>This ID came from the API response after creation.</small>
+                                    <small>{t('Responsecreation')}</small>
                                 </div>
                             </div>
                         </div>
 
                         <div className="form-actions">
-                            <button type="button" className="btn-cancel" onClick={onClose}>Close</button>
-                            <button type="button" className="btn-submit" onClick={resetForm}>Add Another</button>
+                            <button type="button" className="btn-cancel" onClick={onClose}>{t('cancel')}</button>
+                            <button type="button" className="btn-submit" onClick={resetForm}>{t('addAnother')}</button>
                         </div>
                     </div>
                 ) : (
@@ -175,11 +175,11 @@ const AddDisplayModal = ({ onClose, user }) => {
                         {/* Display Identification */}
                         <div className="form-section">
                             <div className="section-icon"><i className="pi pi-info-circle" /></div>
-                            <h3>Display Identification</h3>
-                            <p className="section-desc">External monitoring ID for integrations</p>
+                            <h3>{t('displayIdentification')}</h3>
+                            <p className="section-desc">{t('displayIdentificationDescription')}</p>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Third-Party Monitoring ID</label>
+                                    <label>{t('thirdParty_MonitorId')}</label>
                                     <input
                                         type="text"
                                         placeholder="e.g., MAN-12345, EXT-ABC123"
@@ -189,17 +189,17 @@ const AddDisplayModal = ({ onClose, user }) => {
                                         onChange={(e) => handleFormChange('thirdPartyMonitoringId', e.target.value)}
                                         required
                                     />
-                                    <small>Used as Player ID for display registration.</small>
+                                    <small>{t('displayRegistration')}</small>
                                 </div>
                             </div>
                         </div>
 
                         {/* Basic Information */}
                         <div className="form-section">
-                            <h3>Basic Information</h3>
+                            <h3>{t('basicInformation')}</h3>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Display Name *</label>
+                                    <label>{t('display_name')} *</label>
                                     <input
                                         type="text"
                                         placeholder="e.g., Totem 1 - Community Center"
@@ -213,7 +213,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Location *</label>
+                                    <label>{t('location')} *</label>
                                     <input
                                         type="text"
                                         placeholder="e.g., Main Entrance, Building A"
@@ -227,14 +227,14 @@ const AddDisplayModal = ({ onClose, user }) => {
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label>Assignment Status</label>
+                                    <label>{t('assignmentStatus')}</label>
                                     <select
                                         className="form-select"
                                         value={formData.assignmentStatus}
                                         onChange={(e) => handleFormChange('assignmentStatus', e.target.value)}
                                     >
-                                        <option>Unassigned</option>
-                                        <option>Assigned</option>
+                                        <option>{t('Unassigned')}</option>
+                                        <option>{t('Assigned')}</option>
                                     </select>
                                 </div>
                             </div>
@@ -242,10 +242,10 @@ const AddDisplayModal = ({ onClose, user }) => {
 
                         {/* Display Specifications */}
                         <div className="form-section">
-                            <h3>Display Specifications</h3>
+                            <h3>{t('displaySpecifications')}</h3>
                             <div className="form-row two-col">
                                 <div className="form-group">
-                                    <label>Orientation *</label>
+                                    <label>{t('orientation')}</label>
                                     <div className="orientation-toggle">
                                         <button
                                             type="button"
@@ -264,7 +264,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label>Resolution *</label>
+                                    <label>{t('resolution')} *</label>
                                     <select
                                         value={formData.resolution}
                                         onChange={(e) => handleFormChange('resolution', e.target.value)}
@@ -275,7 +275,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                                             <option key={opt.value} value={opt.value}>{opt.label}</option>
                                         ))}
                                     </select>
-                                    <small>Select screen resolution</small>
+                                    <small>{t('resolution_description')}</small>
                                 </div>
                             </div>
                         </div>
@@ -283,11 +283,11 @@ const AddDisplayModal = ({ onClose, user }) => {
                         {/* Sleep Schedule */}
                         <div className="form-section">
                             <div className="section-icon"><i className="pi pi-moon" /></div>
-                            <h3>Sleep Schedule</h3>
-                            <p className="section-desc">Configure power management and sleep times</p>
+                            <h3>{t('sleep_schedule')}</h3>
+                            <p className="section-desc">{t('sleep_schedule_description')}</p>
                             <div className="form-row two-col">
                                 <div className="form-group">
-                                    <label>Wake Time</label>
+                                    <label>{t('wake_time')}</label>
                                     <div className="time-input">
                                         <input
                                             type="time"
@@ -299,7 +299,7 @@ const AddDisplayModal = ({ onClose, user }) => {
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label>Sleep Time</label>
+                                    <label>{t('sleep_time')}</label>
                                     <div className="time-input">
                                         <input
                                             type="time"
@@ -315,13 +315,15 @@ const AddDisplayModal = ({ onClose, user }) => {
 
                         <div className="form-note">
                             <i className="pi pi-info-circle" />
-                            <p><strong>Next Steps:</strong> After creating this display, install the ORATOR Player app on the physical device and use the generated Display ID for pairing.</p>
+                            <p><strong>{t('nextSteps')}:</strong> {t('displaySetupComplete')}</p>
                         </div>
 
                         <div className="form-actions">
-                            <button type="button" className="btn-cancel" onClick={onClose}>Cancel</button>
+                            <button type="button" className="btn-cancel" onClick={onClose}>
+                                {t('cancel')}
+                            </button>
                             <button type="submit" className="btn-submit" disabled={status === 'loading'}>
-                                {status === 'loading' ? 'Creating...' : 'Create Display'}
+                                {status === 'loading' ? 'Creating...' : t('createDisplay')}
                             </button>
                         </div>
                     </form>

@@ -50,6 +50,27 @@
   "location": "Location",
   "thirdParty_MonitorId": "Third-Party Monitoring ID",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "addDisplay": "Add Display",
+  "addDisplaySubtitle": "Configure and register a new digital signage display",
+  "generatedDisplayId": "Generated Display ID",
+  "display_id": "Display ID",
+  "displayIdentification": "Display Identification",
+  "addAnother": "Add Another",
+  "Responsecreation.": "This ID came from the API response after creation.",
+  "displayIdentificationDescription": "External monitoring ID for integrations",
+  "displayRegistration.": "Used as Player ID for display registration.",
+  "basicInformation": "Basic Information",
+  "assignmentStatus": "Assignment Status",
+  "Unassigned": "Unassigned",
+  "Assigned": "Assigned",
+  "displaySpecifications": "Display Specifications",
+  "orientation": "Orientation",
+  "resolution_description": "Select screen resolution",
+  "nextSteps": "Next Steps",
+  "displaySetupComplete": "Display setup is complete! Here are some next steps to get you started:",
+  "viewDocumentation": "View Documentation",
+  "createDisplay": "Create Display"
+
 
 }

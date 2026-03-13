@@ -50,5 +50,26 @@
     "location": "Lokacija",
     "thirdParty_MonitorId": "ID nadzora treće strane",
     "save": "Spremi",
-    "cancel": "Otkaži"
+    "cancel": "Otkaži",
+    "addDisplay": "Dodaj prikaz",
+    "addDisplaySubtitle": "Konfigurirajte i registrirajte novi digitalni znak",
+    "generatedDisplayId": "Generirani ID zaslona",
+    "display_id": "ID zaslona",
+    "displayIdentification": "Identifikacija zaslona",
+    "addAnother": "Dodaj još jedan",
+    "Responsecreation.": "Ovaj ID dolazi iz API odgovora nakon kreiranja.",
+    "displayIdentificationDescription": "Vanjski ID nadzora za integracije",
+    "displayRegistration": "Koristi se kao ID igrača za registraciju zaslona.",
+    "basicInformation": "Osnovne informacije",
+    "assignmentStatus": "Status dodjele",
+    "Unassigned": "Nedodijeljeno",
+    "Assigned": "Dodijeljeno",
+    "displaySpecifications": "Specifikacije zaslona",
+    "orientation": "Orijentacija",
+    "resolution_description": "Odaberite rezoluciju zaslona",
+    "nextSteps": "Sljedeći koraci",
+    "displaySetupComplete": "Postavljanje zaslona je dovršeno! Evo nekoliko sljedećih koraka za početak:",
+    "viewDocumentation": "Pogledaj dokumentaciju",
+    "createDisplay": "Kreiraj zaslon"
+
 }
