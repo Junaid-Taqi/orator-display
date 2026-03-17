@@ -51,8 +51,8 @@ const DisplyCardList = ({ displays = [], user }) => {
                   <div className="location text-capitalize"><i className="pi pi-map-marker" /> {d.location}</div>
                   <div className="badges-row">
                     <span className={`pill ${cls}`}><i className="pi pi-wifi" /> {label}</span>
-                    {d.playerId && (
-                      <span className="pill pill--blue"><i className="pi pi-hashtag" /> {d.playerId}</span>
+                    {d.displayUuid && (
+                      <span className="pill pill--blue"><i className="pi pi-hashtag" /> {d.displayUuid}</span>
                     )}
                     <span className="pill pill--purple"><i className="pi pi-tv" /> {d.orientation}</span>
                   </div>
