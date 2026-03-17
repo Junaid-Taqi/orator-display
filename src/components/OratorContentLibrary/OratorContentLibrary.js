@@ -39,14 +39,6 @@ const OratorContentLibrary = () => {
             <StatsCards stats={stats} />
             <DisplyCardList displays={displayList} user={user} />
 
-            <button
-                type="button"
-                className="displays-dashboard__help-btn"
-                aria-label="Help"
-            >
-                <i className="pi pi-question" />
-            </button>
-
             {addDisplayOpen && (
                 <AddDisplayModal user={user} onClose={() => setAddDisplayOpen(false)} />
             )}
