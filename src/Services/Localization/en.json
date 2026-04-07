@@ -1,6 +1,7 @@
 {
   "display": "Display",
   "monitor_and_manage": "Monitor and manage all connected digital signage displays",
+  "monitorSignage": "Monitor your digital signage network",
   "add_display": "Add Display",
   "total_displays": "Total Displays",
   "active": "Active",
